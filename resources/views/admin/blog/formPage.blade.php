@@ -50,7 +50,7 @@
                             $selected       = null;
                             if(!empty($category)){
                                 foreach($category as $cActive){
-                                    if($c->id===$cActive->id) {
+                                    if($c->id==$cActive->id) {
                                         $selected = 'selected';
                                         break;
                                     }
