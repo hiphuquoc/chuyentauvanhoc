@@ -83,6 +83,7 @@ class Category extends Model {
         $result = DB::table('categories_info')
                     ->join('seo', 'seo.id', '=', 'categories_info.page_id')
                     ->select(array_merge(config('column.categories_info'), config('column.seo')))
+                    ->orderBy('seo.id', 'ASC')
                     ->get()
                     ->toArray();
         return $result;
@@ -90,9 +91,7 @@ class Category extends Model {
 
     public static function getAllCategoryByTree(){
         /* Lấy danh sách category */
-        $dataCategory   = Category::getAllCategoryFullInfo();
-        /* Buil link full category */
-        $result         = Url::buildFullLinkArray($dataCategory);
+        $result         = Category::getAllCategoryFullInfo();
         /* lấy phần tử level 1 build cây thư mục category */
         $data           = [];
         foreach($result as $r){
@@ -138,7 +137,7 @@ class Category extends Model {
     }
 
     public function pages() {
-        return $this->hasOne(\App\Models\Seo::class, 'id', 'page_id');
+        return $this->hasOne(\App\Models\Seo::class, 'id', 'page_id')->orderBy('ordering', 'ASC');
     }
 
 }

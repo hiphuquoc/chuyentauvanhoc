@@ -3,8 +3,7 @@
     $params     = [
         'limit' => 5
     ];
-    $blogNLVH   = \App\Models\Blog::getListBySeoAliasCategory('nghi-luan-van-hoc', $params);
-    $blogNLVH   = \App\Helpers\Url::buildFullLinkArray($blogNLVH);
+    $blogNLXH   = \App\Models\Blog::getListBySeoAliasCategory('nghi-luan-xa-hoi', $params);
 @endphp
 <footer>
     <div class="container">
@@ -54,8 +53,8 @@
                 </div>
                 <div class="footerBox_item_main">
                    <div class="blogBoxFooter">
-                        @if(!empty($blogNLVH))
-                            @foreach($blogNLVH as $item)
+                        @if(!empty($blogNLXH))
+                            @foreach($blogNLXH as $item)
                                 <div class="blogBoxFooter_item">
                                     <div class="blogBoxFooter_item_image">
                                         <a href="/{{ $item->seo_alias_full }}">

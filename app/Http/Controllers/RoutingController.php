@@ -32,7 +32,6 @@ class RoutingController extends Controller {
                 $params['search_name']  = $searchName;
                 $idCate             = $result['info']->id;
                 $info               = $result['info'] ?? [];
-                $info               = Url::buildFullLinkOne($info);
                 $type               = $result['type'];
                 /* lấy thông tin breadcrumd */
                 $breadcrumb         = Url::buildArrayBreadcrumb($info, $type);
@@ -48,7 +47,6 @@ class RoutingController extends Controller {
             }else if($result['type']==='blog'){ // ====== BLOG =============================
                 $idBlog             = $result['info']->id;
                 $info               = $result['info'] ?? [];
-                $info               = Url::buildFullLinkOne($info);
                 $type               = $result['type'];
                 /* lấy thông tin breadcrumd */
                 $breadcrumb         = Url::buildArrayBreadcrumb($info, $type);

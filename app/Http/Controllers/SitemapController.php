@@ -15,8 +15,7 @@ class SitemapController extends Controller {
         'article'
     ];
 
-    public static function mainSitemap(){     
-        dd(123);  
+    public static function mainSitemap(){
         $sitemapXhtml       = '<urlset xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
         foreach(self::$data as $item){
             $sitemapXhtml   .= self::rowMainSitemap($item);
@@ -27,29 +26,27 @@ class SitemapController extends Controller {
     }
 
     public static function childSitemap(){
-        $sitemapName        = pathinfo($_SERVER['REQUEST_URI'])['filename'];
+        $sitemapName            = pathinfo($_SERVER['REQUEST_URI'])['filename'];
         if(in_array($sitemapName, self::$data)){
-            $sitemapXhtml   = '<urlset xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+            $sitemapXhtml       = '<urlset xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
             switch($sitemapName){
                 case 'category': 
-                    $data   = Category::select('*')
-                                ->with('seo')
-                                ->get();
-                    foreach($data as $item) $sitemapXhtml   .= self::rowChildSitemap($item, 'tin-tuc');
+                    $data       = Category::select('*')
+                                    ->with('pages')
+                                    ->get();
+                    foreach($data as $item) $sitemapXhtml .= self::rowChildSitemap($item);
                     break;
                 case 'article': 
                     /* Blog */
-                    $data   = Blog::select('*')
-                                ->with('seo')
-                                ->get();
-                    foreach($data as $item) {
-                        $sitemapXhtml   .= self::rowChildSitemapHaveImage($item, 'tin-tuc/'.$item->category_slug);
-                    }
+                    $data       = Blog::select('*')
+                                    ->with('pages')
+                                    ->get();
+                    foreach($data as $item) $sitemapXhtml .= self::rowChildSitemapHaveImage($item);
                     break;
                 default:
                     break;
             }
-            $sitemapXhtml   .= '</urlset>';
+            $sitemapXhtml       .= '</urlset>';
             return response()->make($sitemapXhtml)->header('Content-Type', 'application/xml');
         }
     }
@@ -69,57 +66,30 @@ class SitemapController extends Controller {
     private static function rowChildSitemapHaveImage($item = null, $prefix = null){
         $result     = null;
         if(!empty($item)){
-            /* URL */
-            switch($item->slug){
-                case '/': // trang chủ
-                    $url    = env('APP_URL');
-                    break;
-                case 'chu-de':
-                case 'vi-tri':
-                    $url    = env('APP_URL').'/thai-minh-inside/'.$item->slug;
-                    break;
-                default:
-                    $url    = env('APP_URL').'/'.$item->slug;
-                    if(!empty($prefix)) $url = env('APP_URL').'/'.$prefix.'/'.$item->slug;
-                    break;
-            }
-            /* Image */
-            $imagePath  = self::buildUrlImage($item->image_name);
             $result = '<url>
-                            <loc>'.$url.'</loc>
-                            <lastmod>'.date('c', strtotime($item->updated_at)).'</lastmod>
+                            <loc>'.env('APP_URL').'/'.$item->pages->seo_alias_full.'</loc>
+                            <lastmod>'.date('c', strtotime($item->pages->updated_at)).'</lastmod>
                             <changefreq>daily</changefreq>
                             <priority>0.8</priority>
                             <image:image>
-                                <image:loc>'.$imagePath.'</image:loc>
-                                <image:title>'.self::replaceSpecialCharactorXml($item->title).'</image:title>
+                                <image:loc>'.env('APP_URL').$item->pages->image.'</image:loc>
+                                <image:title>'.self::replaceSpecialCharactorXml($item->pages->title).'</image:title>
                             </image:image>
                         </url>';
         }
         return $result;
     }
 
-    private static function rowChildSitemap($item = null, $prefix = null){
+    private static function rowChildSitemap($item = null){
         $result     = null;
         if(!empty($item)){
-            /* URL */
-            $url    = env('APP_URL').'/'.$item->slug;
-            if(!empty($prefix)) $url    = env('APP_URL').'/'.$prefix.'/'.$item->slug;
+            $url    = env('APP_URL').'/'.$item->pages->seo_alias_full;
             $result = '<url>
                             <loc>'.$url.'</loc>
-                            <lastmod>'.date('c', strtotime($item->updated_at)).'</lastmod>
+                            <lastmod>'.date('c', strtotime($item->pages->updated_at)).'</lastmod>
                             <changefreq>daily</changefreq>
                             <priority>0.8</priority>
                         </url>';
-        }
-        return $result;
-    }
-
-    private static function buildUrlImage($imageName = null){
-        $result = null;
-        if(!empty($imageName)){
-            $result = env('APP_URL').'/storage/app/uploads/public/';
-            $result .= substr($imageName, 0, 3).'/'.substr($imageName, 3, 3).'/'.substr($imageName, 6, 3).'/'.$imageName;
         }
         return $result;
     }

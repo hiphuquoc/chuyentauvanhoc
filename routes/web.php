@@ -33,18 +33,18 @@ Route::prefix('admin')->group(function(){
     Route::middleware(['auth'])->group(function () {
         Route::prefix('category')->group(function(){
             Route::get('/', [CategoryAdminController::class, 'list'])->name('admin.category.list');
-            Route::get('/{id}/viewEdit', [CategoryAdminController::class, 'viewEdit'])->name('admin.category.viewEdit');
-            Route::get('/viewInsert', [CategoryAdminController::class, 'viewInsert'])->name('admin.category.viewInsert');
+            Route::get('/view', [CategoryAdminController::class, 'view'])->name('admin.category.view');
             Route::post('/create', [CategoryAdminController::class, 'create'])->name('admin.category.create');
             Route::post('/update', [CategoryAdminController::class, 'update'])->name('admin.category.update');
+            Route::get('/delete', [CategoryAdminController::class, 'delete'])->name('admin.category.delete');
         });
 
         Route::prefix('blog')->group(function(){
             Route::get('/', [BlogAdminController::class, 'list'])->name('admin.blog.list');
-            Route::get('/{id}/viewEdit', [BlogAdminController::class, 'viewEdit'])->name('admin.blog.viewEdit');
-            Route::get('/viewInsert', [BlogAdminController::class, 'viewInsert'])->name('admin.blog.viewInsert');
+            Route::get('/view', [BlogAdminController::class, 'view'])->name('admin.blog.view');
             Route::post('/create', [BlogAdminController::class, 'create'])->name('admin.blog.create');
             Route::post('/update', [BlogAdminController::class, 'update'])->name('admin.blog.update');
+            Route::get('/delete', [BlogAdminController::class, 'delete'])->name('admin.blog.delete');
         });
 
         /* ===== IMAGE ===== */
@@ -61,13 +61,14 @@ Route::prefix('admin')->group(function(){
 });
 Route::post('/buildTocContent', [BlogController::class, 'buildTocContent'])->name('main.blog.buildTocContent');
 Route::get('/exportPdfBlog', [BlogController::class, 'exportPdf'])->name('main.blog.exportPdf');
-Route::get("/{slug}/{slug2?}/{slug3?}/{slug4?}/{slug5?}", [RoutingController::class, 'routing'])->name('routing');
 
 Route::get('sitemap.xml', [SitemapController::class, 'mainSitemap'])->name('sitemap.main');
 Route::get('sitemap/category.xml', [SitemapController::class, 'childSitemap'])->name('sitemap.category');
 Route::get('sitemap/article.xml', [SitemapController::class, 'childSitemap'])->name('sitemap.article');
 Route::get('sitemap/product.xml', [SitemapController::class, 'childSitemap'])->name('sitemap.product');
 Route::get('sitemap/page.xml', [SitemapController::class, 'childSitemap'])->name('sitemap.page');
+
+Route::get("/{slug}/{slug2?}/{slug3?}/{slug4?}/{slug5?}", [RoutingController::class, 'routing'])->name('routing');
 
 // Auth::routes();
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

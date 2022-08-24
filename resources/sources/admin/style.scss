@@ -186,6 +186,16 @@ table {
     text-align: left !important;
 }
 
+.errorList {
+    font-size: 1rem;
+    line-height: 1.6;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    > li {
+        color: $color-red;
+    }
+}
+
 /* ===== Viết đè CSS Theme ===== */
 .navigation {
     font-family: $font-primary-text !important;

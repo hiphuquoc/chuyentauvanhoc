@@ -3,7 +3,7 @@
 namespace App\Services;
 
 use App\Models\Category;
-use App\Models\Page;
+use App\Models\Seo;
 
 class BuildModelService {
     public static function buildArrayInsertUpdateTablePages($dataForm, $dataPath = null){
@@ -45,6 +45,8 @@ class BuildModelService {
             $result['seo_title']                = $dataForm['seo_title'] ?? $dataForm['title'] ?? null;
             $result['seo_description']          = $dataForm['seo_description'] ?? $dataForm['description'] ?? null;
             $result['seo_alias']                = $dataForm['seo_alias'];
+            /* slug full */
+            $result['seo_alias_full']           = Seo::buildFullUrl($dataForm['seo_alias'], $pageLevel, $pageParent);
             $result['rating_author_name']       = 1;
             $result['rating_author_star']       = 5;
             $result['rating_aggregate_count']   = $dataForm['rating_aggregate_count'] ?? 0;

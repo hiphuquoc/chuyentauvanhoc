@@ -13,7 +13,7 @@
             $image  = '/images/image-default-750.png';
             if(!empty($item->pages->image_small)&&$type!='copy') $image = $item->pages->image_small ?? $item->pages->image;
         @endphp
-        <img id="imageUpload" src="{{ $image }}" />
+        <img id="imageUpload" src="{{ $image }}?{{ time() }}" />
     </div>
 </div>
 

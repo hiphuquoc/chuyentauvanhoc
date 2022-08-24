@@ -1,9 +1,4 @@
-@if(!empty($item->id))
-    <input type="hidden" name="id" value="{{ $item->id }}" />
-@endif
-@if(!empty($item->pages->id))
-    <input type="hidden" name="seo_id" value="{{ $item->pages->id }}" />
-@endif
+<input type="hidden" name="id" value="{{ !empty($item->id)&&$type=='edit' ? $item->id : null }}" />
 
 <div class="formBox">
     <div class="formBox_full">

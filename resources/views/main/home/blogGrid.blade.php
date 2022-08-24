@@ -4,7 +4,6 @@
         'limit'         => 10
     ];
     $dataBlog   = \App\Models\Blog::getList($params);
-    // $dataBlog   = \App\Helpers\Url::buildFullLinkArray($dataBlog);
 @endphp
 
 

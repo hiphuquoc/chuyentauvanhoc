@@ -11,6 +11,7 @@ return [
         'seo.seo_title', 
         'seo.seo_description', 
         'seo.seo_alias', 
+        'seo.seo_alias_full',
         'seo.rating_aggregate_count', 
         'seo.rating_aggregate_star', 
         'seo.created_by', 

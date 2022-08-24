@@ -1,3 +1,5 @@
+<input type="hidden" name="seo_id" value="{{ !empty($item->pages->id)&&$type=='edit' ? $item->pages->id : null }}" />
+
 <div class="formBox">
     <div class="formBox_full">
 

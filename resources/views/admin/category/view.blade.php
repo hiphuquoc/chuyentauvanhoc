@@ -18,6 +18,17 @@
             <div class="pageAdminWithRightSidebar_header">
                 {{ $titlePage }}
             </div>
+            <!-- Error -->
+                @if ($errors->any())
+                <ul class="errorList">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            @endif
+            <!-- MESSAGE -->
+            @include('admin.template.messageAction')
+            <!-- Content -->
             <div class="pageAdminWithRightSidebar_main">
                 <div class="pageAdminWithRightSidebar_main_content">
                     <!-- START:: Main content -->

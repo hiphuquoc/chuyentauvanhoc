@@ -41,10 +41,40 @@ class Seo extends Model {
     public static function updateItem($id, $params){
         $flag           = false;
         if(!empty($id)&&!empty($params)){
-            $model      = Seo::find($id);
+            $model      = self::find($id);
             foreach($params as $key => $value) $model->{$key}  = $value;
             $flag       = $model->update();
+            /* mỗi lần cập nhật lại slug thì phải build lại seo_alias_full của toàn bộ children */
+            if($flag==true){
+                $childs = self::select('id', 'level', 'parent', 'seo_alias')
+                            ->where('parent', $id)
+                            ->get();
+                foreach($childs as $child){
+                    $urlNew         = self::buildFullUrl($child->seo_alias, $child->level, $child->parent);
+                    $paramsUpdate   = ['seo_alias_full' => $urlNew];
+                    self::updateItem($child->id, $paramsUpdate);
+                }
+            }
         }
         return $flag;
+    }
+
+    public static function buildFullUrl($seoAlias, $level, $parent){
+        $url    = null;
+        if(!empty($seoAlias)){
+            $infoSeo    = self::select('id', 'seo_alias', 'parent')
+                            ->get();
+            $url        = $seoAlias;
+            for($i=1;$i<$level;++$i){
+                foreach($infoSeo as $item){
+                    if($item->id==$parent) {
+                        $url    = $item->seo_alias.'/'.$url;
+                        $parent = $item->parent;
+                        break;
+                    }
+                }
+            }
+        }
+        return $url;
     }
 }

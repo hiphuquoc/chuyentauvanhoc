@@ -64,5 +64,16 @@
             const elemt = $('#'+idForm);
             if(elemt.valid()) elemt.submit();
         }
+
+        function deleteItem(id){
+            $.ajax({
+                url         : "{{ route('admin.blog.delete') }}",
+                type        : "GET",
+                dataType    : "html",
+                data        : { id : id }
+            }).done(function(data){
+                if(data==true) $('#blog_'+id).remove();
+            });
+        }
     </script>
 @endpush

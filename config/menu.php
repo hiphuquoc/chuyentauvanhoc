@@ -150,7 +150,7 @@ return [
                 ],
                 [
                     'name'  => '2. Thêm mới',
-                    'route' => 'admin.blog.viewInsert',
+                    'route' => 'admin.blog.view',
                     'icon'  => '<i data-feather=\'circle\'></i>'
                 ]
             ]
@@ -167,7 +167,7 @@ return [
                 ],
                 [
                     'name'  => '2. Thêm mới',
-                    'route' => 'admin.category.viewInsert',
+                    'route' => 'admin.category.view',
                     'icon'  => '<i data-feather=\'circle\'></i>'
                 ]
             ]

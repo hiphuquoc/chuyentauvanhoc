@@ -84,8 +84,6 @@ class Url {
             array_multisort($level, SORT_ASC, $result);
             /* nếu là blog thì ghép thêm data blog vào */
             if($type==='blog') $result[] = $data;
-            /* build link full cho result */
-            $result = self::buildFullLinkArray($result);
         }
         return $result;
     }
