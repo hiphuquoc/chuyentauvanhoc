@@ -173,8 +173,7 @@ class AdminImageController extends Controller {
                     $filePathUpload = Storage::path(config('admin.images.folderUpload')).$fileNameUpload;
                 }
             }
-            /* thêm ảnh */     
-            // dd($filePathUpload);     
+            /* thêm ảnh */ 
             ImageManagerStatic::make($requestImage->getRealPath())
                 ->save($filePathUpload);
             $fileSaved      = $filePathUpload;
