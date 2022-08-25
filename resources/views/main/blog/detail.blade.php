@@ -60,6 +60,10 @@
    <script type="text/javascript">
       $(window).ready(function(){
          buildTocContent();
+
+         $('.pageContent').find('table:not(.noResponsive)').each(function(){
+            $(this).wrapAll('<div class="customScrollBar-x" />');
+         })
       });
 
       function buildTocContent(elemtSearch = 'js_buildTocContent_content'){
