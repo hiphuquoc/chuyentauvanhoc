@@ -70,7 +70,7 @@ Route::prefix('admin')->group(function(){
         });
     });
 });
-Route::post('/buildTocContent', [BlogController::class, 'buildTocContent'])->name('main.blog.buildTocContent');
+Route::get('/buildTocContent', [BlogController::class, 'buildTocContent'])->name('main.blog.buildTocContent');
 Route::get('/exportPdfBlog', [BlogController::class, 'exportPdf'])->name('main.blog.exportPdf');
 
 Route::get('sitemap.xml', [SitemapController::class, 'mainSitemap'])->name('sitemap.main');

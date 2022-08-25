@@ -84,10 +84,10 @@
          });
          $.ajax({
                url         : '{{ route("main.blog.buildTocContent") }}',
-               type        : 'post', 
+               type        : 'get', 
                dataType    : 'html',
                data        : {
-                  _token  : '{{ csrf_token() }}',
+                  // _token  : '{{ csrf_token() }}',
                   data    : data
                },
                success     : function(data){
