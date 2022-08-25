@@ -40,5 +40,15 @@
         }
     })
 
+    function showHideLoadingFull(action = 'show'){
+        if(action=='show'){
+            $('#js_loadingFull').css('display', 'flex');
+            $('body').css('overflow', 'hidden');
+        }else {
+            $('#js_loadingFull').css('display', 'none');
+            $('body').css('overflow', 'unset');
+        }
+    }
+
     
 </script>

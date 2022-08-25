@@ -24,5 +24,9 @@ return [
     ],
     'sliders'    => [
         'folderUpload'          => 'public/images/slider/'
+    ],
+    'cache'     => [
+        'folderSave'    => 'public/caches/',
+        'extension'     => 'html',
     ]
 ];

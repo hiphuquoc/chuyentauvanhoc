@@ -9,11 +9,14 @@
 
 <!-- === START:: Body === -->
 <body>
+
+    <div id="js_loadingFull" class="loadingFull">
+        <div class="spinner-grow text-primary" role="status" style="color:#fff !important;">
+            <span class="visually-hidden"></span>
+        </div>
+    </div>
+
     <!-- === START:: Header === -->
-    {{-- <div class="headerTop">
-        <div class="headerTop_phone"><i class="fa-solid fa-phone"></i>0388.189.089</div>
-        <div class="headerTop_text">Chuyến tàu Văn Học - Học văn không khó vì có Cô Ngọc Anh!</div>
-    </div> --}}
     @include('admin.snippets.menu')
     <!-- === END:: Header === -->
 

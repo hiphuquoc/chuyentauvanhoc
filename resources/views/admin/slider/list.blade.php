@@ -174,6 +174,7 @@
         /* Upload and append thêm ảnh */
         $("#formUpload").on('submit', function(e) {
             e.preventDefault();
+            showHideLoadingFull('show');
             $.ajax({
                 url             : "{{ route('admin.slider.uploadImages') }}",
                 type            : "POST",
@@ -183,10 +184,13 @@
                 cache           : false,
                 processData     : false,
                 success         : function(data){
-                    const elementWrite  = $('#js_uploadImage_idWrite');
-                    let contentOld      = elementWrite.html();
-                    elementWrite.html(data.content+contentOld);
-                    document.getElementById("formUpload").reset();
+                    setTimeout(() => {
+                        const elementWrite  = $('#js_uploadImage_idWrite');
+                        let contentOld      = elementWrite.html();
+                        elementWrite.html(data.content+contentOld);
+                        document.getElementById("formUpload").reset();
+                        showHideLoadingFull('hide');
+                    }, 300);
                 }
             });
         });
