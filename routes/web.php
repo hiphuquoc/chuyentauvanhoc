@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RoutingController;
 use App\Http\Controllers\AdminImageController;
+use App\Http\Controllers\AdminSliderController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\SitemapController;
 /* ADMIN */
@@ -56,6 +57,16 @@ Route::prefix('admin')->group(function(){
             Route::post('/changeName', [AdminImageController::class, 'changeName'])->name('admin.image.changeName');
             Route::post('/changeImage', [AdminImageController::class, 'changeImage'])->name('admin.image.changeImage');
             Route::post('/removeImage', [AdminImageController::class, 'removeImage'])->name('admin.image.removeImage');
+        });
+        /* ===== IMAGE ===== */
+        Route::prefix('slider')->group(function(){
+            Route::get('/', [AdminSliderController::class, 'list'])->name('admin.slider.list');
+            Route::post('/uploadImages', [AdminSliderController::class, 'uploadImages'])->name('admin.slider.uploadImages');
+            Route::post('/loadImage', [AdminSliderController::class, 'loadImage'])->name('admin.slider.loadImage');
+            Route::post('/loadModal', [AdminSliderController::class, 'loadModal'])->name('admin.slider.loadModal');
+            Route::post('/changeName', [AdminSliderController::class, 'changeName'])->name('admin.slider.changeName');
+            Route::post('/changeImage', [AdminSliderController::class, 'changeImage'])->name('admin.slider.changeImage');
+            Route::post('/removeImage', [AdminSliderController::class, 'removeImage'])->name('admin.slider.removeImage');
         });
     });
 });

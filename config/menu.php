@@ -175,7 +175,12 @@ return [
         [
             'name'      => 'Quản lí Ảnh',
             'route'     => 'admin.image.list',
-            'icon'      => '<i data-feather=\'bookmark\'></i>'
+            'icon'      => '<i data-feather=\'image\'></i>'
+        ],
+        [
+            'name'      => 'Quản lí Slider',
+            'route'     => 'admin.slider.list',
+            'icon'      => '<i data-feather=\'image\'></i>'
         ]
     ]
 ];

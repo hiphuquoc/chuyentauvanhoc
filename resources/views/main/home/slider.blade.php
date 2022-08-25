@@ -1,15 +1,7 @@
 @php
     $dataSlider     = [
-        'desktop'   => [
-            '/images/sources/banner-chuyen-tau-van-hoc-2.jpg',
-            '/images/sources/banner-chuyen-tau-van-hoc-3.jpg',
-            '/images/sources/banner-chuyen-tau-van-hoc-4.jpg'
-        ],
-        'mobile'   => [
-            '/images/sources/slider-1-mobile.jpg',
-            '/images/sources/slider-2-mobile.jpg',
-            '/images/sources/slider-3-mobile.jpg'
-        ]
+        'desktop'   => glob(Storage::path(config('admin.sliders.folderUpload')).'desktop-*'),
+        'mobile'    => glob(Storage::path(config('admin.sliders.folderUpload')).'mobile-*')
     ];
 @endphp
 
@@ -17,7 +9,7 @@
     <div class="sliderBoxHome">
         @foreach($dataSlider['desktop'] as $item)
             <div class="sliderBoxHome_item">
-                <img src="{{ $item }}" alt="banner Chuyến tàu Văn học" title="banner Chuyến tàu Văn học" />
+                <img src="{{ Storage::url(config('admin.sliders.folderUpload')).basename($item) }}" alt="Chuyến tàu Văn học" title="Chuyến tàu Văn học" />
             </div>
         @endforeach
     </div>
@@ -27,7 +19,7 @@
     <div class="sliderBoxHome">
         @foreach($dataSlider['mobile'] as $item)
             <div class="sliderBoxHome_item">
-                <img src="{{ $item }}" alt="banner Chuyến tàu Văn học" title="banner Chuyến tàu Văn học" />
+                <img src="{{ Storage::url(config('admin.sliders.folderUpload')).basename($item) }}" alt="Chuyến tàu Văn học" title="Chuyến tàu Văn học" />
             </div>
 
         @endforeach

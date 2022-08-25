@@ -21,5 +21,8 @@ return [
         ],
         'extension'             => 'webp',
         'quality'               => '90'
+    ],
+    'sliders'    => [
+        'folderUpload'          => 'public/images/slider/'
     ]
 ];

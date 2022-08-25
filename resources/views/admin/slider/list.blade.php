@@ -1,12 +1,12 @@
 @extends('layouts.admin')
 @section('content')
 
-<div class="titlePage">Danh sách Ảnh</div>
+<div class="titlePage">Danh sách Slider</div>
 <!-- ===== START: SEARCH FORM ===== -->
 
 <div class="searchBox">
     <div class="searchBox_item">
-        <form id="formSearch" method="get" action="{{ route('admin.image.list') }}">
+        <form id="formSearch" method="get" action="{{ route('admin.slider.list') }}">
             <div class="input-group">
                 <input type="text" class="form-control" name="search_name" placeholder="Tìm theo tên" value="{{ $params['search_name'] ?? null }}">
                 <button class="btn btn-primary waves-effect" id="button-addon2" type="submit">Tìm</button>
@@ -25,9 +25,9 @@
 </div>
 
 <!-- ===== END: SEARCH FORM ===== -->
-<div id="js_uploadImage_idWrite" class="imageBox" style="padding-bottom:2rem;">
+<div id="js_uploadImage_idWrite" class="sliderBox" style="padding-bottom:2rem;">
     @foreach($list as $item)
-        @include('admin.image.oneRow', compact('item'))
+        @include('admin.slider.oneRow', compact('item'))
     @endforeach
 </div>
 
@@ -68,7 +68,7 @@
 
         function loadModal(type, basename){
             $.ajax({
-                url         : "{{ route('admin.image.loadModal') }}",
+                url         : "{{ route('admin.slider.loadModal') }}",
                 type        : "post",
                 dataType    : "json",
                 data        : { 
@@ -96,7 +96,7 @@
             const nameNew       = $('#name_new').val();
             const idImageBox    = basenameOld.slice(0, basenameOld.lastIndexOf('.'));
             $.ajax({
-                url         : "{{ route('admin.image.changeName') }}",
+                url         : "{{ route('admin.slider.changeName') }}",
                 type        : "post",
                 dataType    : "json",
                 data        : { 
@@ -126,7 +126,7 @@
             e.preventDefault();
             const filenameImage     = $('#filename_image').val();
             $.ajax({
-                url             : "{{ route('admin.image.changeImage') }}",
+                url             : "{{ route('admin.slider.changeImage') }}",
                 type            : "POST",
                 dataType        : 'json',
                 data            : new FormData(this),
@@ -157,7 +157,7 @@
             const heightBox = $('#'+idBox).outerHeight();
             addLoading(idBox, heightBox);
             $.ajax({
-                url         : "{{ route('admin.image.loadImage') }}",
+                url         : "{{ route('admin.slider.loadImage') }}",
                 type        : "post",
                 dataType    : "html",
                 data        : { 
@@ -175,7 +175,7 @@
         $("#formUpload").on('submit', function(e) {
             e.preventDefault();
             $.ajax({
-                url             : "{{ route('admin.image.uploadImages') }}",
+                url             : "{{ route('admin.slider.uploadImages') }}",
                 type            : "POST",
                 dataType        : 'json',
                 data            : new FormData(this),
@@ -195,7 +195,7 @@
             const heightBox = $('#'+idBox).outerHeight();
             addLoading(idBox, heightBox);
             $.ajax({
-                url         : "{{ route('admin.image.removeImage') }}",
+                url         : "{{ route('admin.slider.removeImage') }}",
                 type        : "post",
                 dataType    : "html",
                 data        : { 
@@ -210,7 +210,7 @@
         }
 
         function addLoading(idBox, heightBox = 300){
-            const htmlLoadding  = '<div style="display:flex;align-items:center;justify-content:center;height:'+heightBox+'px;"><div class="spinner-grow text-primary me-1" role="status"><span class="visually-hidden">Loading...</span></div></div>';
+            const htmlLoadding  = '<div style="display:flex;align-items:center;justify-content:center;height:'+heightBox+'px;width:100%;"><div class="spinner-grow text-primary me-1" role="status"><span class="visually-hidden">Loading...</span></div></div>';
             $('#'+idBox).html(htmlLoadding);
         }
 
