@@ -9,7 +9,7 @@
     <div class="sliderBoxHome">
         @foreach($dataSlider['desktop'] as $item)
             <div class="sliderBoxHome_item">
-                <img src="{{ Storage::url(config('admin.sliders.folderUpload')).basename($item) }}" alt="Chuyến tàu Văn học" title="Chuyến tàu Văn học" />
+                <img src="{{ Storage::url(config('admin.sliders.folderUpload')).basename($item) }}?{{ time() }}" alt="Chuyến tàu Văn học" title="Chuyến tàu Văn học" />
             </div>
         @endforeach
     </div>
@@ -19,7 +19,7 @@
     <div class="sliderBoxHome">
         @foreach($dataSlider['mobile'] as $item)
             <div class="sliderBoxHome_item">
-                <img src="{{ Storage::url(config('admin.sliders.folderUpload')).basename($item) }}" alt="Chuyến tàu Văn học" title="Chuyến tàu Văn học" />
+                <img src="{{ Storage::url(config('admin.sliders.folderUpload')).basename($item) }}?{{ time() }}" alt="Chuyến tàu Văn học" title="Chuyến tàu Văn học" />
             </div>
 
         @endforeach

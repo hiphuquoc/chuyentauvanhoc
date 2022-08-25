@@ -8,7 +8,7 @@
     @endphp
     <div id="{{ $infoImage['filename'] }}" class="imageBox_item" style="{{ $style ?? null }}">
         <div class="imageBox_item_image">
-            <img src="{{ $urlImage }}?{{ time() }}" alt="" title="" />
+            <img src="{{ $urlImage }}?{{ time() }}?{{ time() }}" alt="" title="" />
         </div>
         <div class="imageBox_item_content">
             <div class="imageBox_item_content_text">

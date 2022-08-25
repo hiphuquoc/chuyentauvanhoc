@@ -16,7 +16,7 @@
                 <div style="margin-bottom:0.5rem;">{{ $urlImage }}</div>
                 <div>width: {{ !empty($infoSize[0]) ? $infoSize[0].'px' : '-' }}</div>
                 <div>height: {{ !empty($infoSize[1]) ? $infoSize[1].'px' : '-' }}</div>
-                <div>size: 19.4kb</div>
+                <div>size: -</div>
             </div>
             <div class="sliderBox_item_content_action">
                 <!-- copy đường dẫn -->
