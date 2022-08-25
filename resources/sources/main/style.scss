@@ -37,7 +37,7 @@ $folderFont : '/fonts/';
     justify-content: space-between;
     margin-bottom: 3rem;
     &_content {
-        width: calc(100% - 320px - 1.5rem);
+        width: calc(100% - 340px - 1.5rem);
         height: max-content;
         &.background {
             background: #fff;
@@ -52,7 +52,7 @@ $folderFont : '/fonts/';
         }
     }
     &_sidebar {
-        width: 320px;
+        width: 340px;
         max-width: 420px;
         margin-top: 0 !important;
         height: max-content;
@@ -63,12 +63,12 @@ $folderFont : '/fonts/';
             box-shadow: 0 0 5px $bg-04;
         }
     }
-    @media (max-width: 1199px) {
-        margin-bottom: 2.5rem;
-        &_content {
-            width: calc(100% - 320px - 2rem);
-        }
-    }
+    // @media (max-width: 1199px) {
+    //     margin-bottom: 2.5rem;
+    //     &_content {
+    //         width: calc(100% - 320px - 2rem);
+    //     }
+    // }
     @media (max-width: 990px) {
         flex-wrap: wrap;
         margin-bottom: 2rem;

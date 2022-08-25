@@ -325,7 +325,7 @@ button i {
   margin-bottom: 3rem;
 }
 .pageContent_content {
-  width: calc(100% - 320px - 1.5rem);
+  width: calc(100% - 340px - 1.5rem);
   height: -webkit-max-content;
   height: -moz-max-content;
   height: max-content;
@@ -342,7 +342,7 @@ button i {
   margin-top: 0.75rem;
 }
 .pageContent_sidebar {
-  width: 320px;
+  width: 340px;
   max-width: 420px;
   margin-top: 0 !important;
   height: -webkit-max-content;
@@ -354,14 +354,6 @@ button i {
   padding: 0.75rem;
   border-radius: 5px;
   box-shadow: 0 0 5px #dee2e6;
-}
-@media (max-width: 1199px) {
-  .pageContent {
-    margin-bottom: 2.5rem;
-  }
-  .pageContent_content {
-    width: calc(100% - 320px - 2rem);
-  }
 }
 @media (max-width: 990px) {
   .pageContent {
