@@ -1,12 +1,17 @@
 @extends('layouts.main')
 @section('content')
-    <div class="container">
-        <div class="notFound">
-            <div class="notFound_image">
-                <img src="/images/sources/404.JPG" alt="404 not found" title="404 not found" />
+    
+    <div class="errorBox">
+        <div class="container">
+            <h1 class="zoom-area titlePage">Lỗi tải trang... Trang này không tồn tại!</h1>
+            <section class="error-container">
+                <span class="four"><span class="screen-reader-text">4</span></span>
+                <span class="zero"><span class="screen-reader-text">0</span></span>
+                <span class="four"><span class="screen-reader-text">4</span></span>
+            </section>
+            <div class="link-container">
+                <a href="/" class="more-link"><i class="fa-solid fa-angles-left"></i>Quay lại trang chủ</a>
             </div>
-            <h1>404 - Lỗi không tìm thấy trang!</h1>
-            <a href="/">Trở về Trang chủ</a>
         </div>
     </div>
 @endsection
