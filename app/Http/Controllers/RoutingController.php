@@ -89,7 +89,17 @@ class RoutingController extends Controller {
             }
         }else {
             /* Error 404 */
-            return view('main.error.404');
+            /* cache */
+            $nameCache              = '404.'.config('admin.cache.extension');
+            $pathCache              = Storage::path(config('admin.cache.folderSave')).$nameCache;
+            $cacheTime    	        = 1800;
+            if(file_exists($pathCache)&&$cacheTime>(time() - filectime($pathCache))){
+                $xhtml              = file_get_contents($pathCache);
+            }else {
+                $xhtml              = view('main.error.404')->render();
+                Storage::put(config('admin.cache.folderSave').$nameCache, $xhtml);
+            }
+            echo $xhtml;
         }
     }
 
