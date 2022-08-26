@@ -664,7 +664,7 @@ a.more-link > i {
 /* START:: Breadcrumb ======================================== */
 .breadcrumbBox {
   margin-bottom: 1.5rem;
-  padding-top: 0.5rem;
+  padding-top: 0.75rem;
 }
 .breadcrumbBox .container {
   font-size: 0.95rem;
