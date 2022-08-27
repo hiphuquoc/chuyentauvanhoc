@@ -95,6 +95,9 @@
                         <div class="footerBox_item_main_callPhone__title">Gọi Cô Ngọc Anh ngay!</div>
                         <a href="tel:0388189089" class="footerBox_item_main_callPhone__phone">0388.189.089</a>
                     </div>
+                    <div class="footerBox_item_main">
+                        <a href="//www.dmca.com/Protection/Status.aspx?ID=93d7b793-f100-45c2-a797-4e62873680db" title="DMCA.com Protection Status" class="dmca-badge"> <img src ="https://images.dmca.com/Badges/dmca-badge-w200-5x1-07.png?ID=93d7b793-f100-45c2-a797-4e62873680db"  alt="DMCA.com Protection Status" /></a>  <script src="https://images.dmca.com/Badges/DMCABadgeHelper.min.js"> </script>
+                    </div>
                 </div>
             </div>
         </div>

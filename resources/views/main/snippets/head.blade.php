@@ -4,6 +4,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0,minimal-ui">
 <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+<!-- DMCA -->
+<meta name='dmca-site-verification' content='eGZkK0JMS0pRTzNLbVlUVHU4bkhhWjAyRGpJbUtuREp5WW8rYzdOU29IRT01' />
 
 <link rel="shortcut icon" type="image/x-icon" href="{{ asset('/images/favicon.jpg') }}">
 
