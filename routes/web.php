@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RoutingController;
 use App\Http\Controllers\AdminImageController;
 use App\Http\Controllers\AdminSliderController;
+use App\Http\Controllers\AdminCacheController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\SitemapController;
 /* ADMIN */
@@ -67,6 +68,10 @@ Route::prefix('admin')->group(function(){
             Route::post('/changeName', [AdminSliderController::class, 'changeName'])->name('admin.slider.changeName');
             Route::post('/changeImage', [AdminSliderController::class, 'changeImage'])->name('admin.slider.changeImage');
             Route::post('/removeImage', [AdminSliderController::class, 'removeImage'])->name('admin.slider.removeImage');
+        });
+        /* ===== CACHE ===== */
+        Route::prefix('cache')->group(function(){
+            Route::get('/clearCacheAllPage', [AdminCacheController::class, 'clearCacheAllPage'])->name('admin.cache.clearCacheAllPage');
         });
     });
 });

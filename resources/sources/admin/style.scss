@@ -304,7 +304,7 @@ label.error {
             height: 100%;
             background: #fff;
             &_item {
-                padding: 1.5rem;
+                padding: 0.75rem;
                 &:not(:first-child){
                     margin-top: 0.5rem;
                     padding-top: 1.5rem;
@@ -314,10 +314,18 @@ label.error {
                     padding-bottom: 1rem;
                     justify-content: flex-end;
                     display: flex;
+                    align-items: center;
                     > * {
                         &:not(:first-child){
                             margin-left: 1rem;
                         }
+                    }
+                }
+                > a {
+                    display: flex;
+                    svg {
+                        width: 2rem;
+                        height: 2rem;
                     }
                 }
             }

@@ -181,6 +181,11 @@ return [
             'name'      => 'Quản lí Slider',
             'route'     => 'admin.slider.list',
             'icon'      => '<i data-feather=\'image\'></i>'
+        ],
+        [
+            'name'      => 'Xóa cache',
+            'route'     => 'admin.cache.clearCacheAllPage',
+            'icon'      => '<i class="fa-solid fa-ban"></i>'
         ]
     ]
 ];

@@ -240,7 +240,7 @@ label.error {
   background: #fff;
 }
 .pageAdminWithRightSidebar_main_rightSidebar_item {
-  padding: 1.5rem;
+  padding: 0.75rem;
 }
 .pageAdminWithRightSidebar_main_rightSidebar_item:not(:first-child) {
   margin-top: 0.5rem;
@@ -251,9 +251,17 @@ label.error {
   padding-bottom: 1rem;
   justify-content: flex-end;
   display: flex;
+  align-items: center;
 }
 .pageAdminWithRightSidebar_main_rightSidebar_item.buttonAction > *:not(:first-child) {
   margin-left: 1rem;
+}
+.pageAdminWithRightSidebar_main_rightSidebar_item > a {
+  display: flex;
+}
+.pageAdminWithRightSidebar_main_rightSidebar_item > a svg {
+  width: 2rem;
+  height: 2rem;
 }
 
 /* ===== START: Image */
