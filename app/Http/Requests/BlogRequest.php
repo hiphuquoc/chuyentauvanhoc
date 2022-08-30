@@ -46,6 +46,7 @@ class BlogRequest extends FormRequest
                     }
                 }
             ],
+            'category'                  => 'required',
             'rating_aggregate_count'    => 'required',
             'rating_aggregate_star'     => 'required'
         ];
@@ -62,6 +63,7 @@ class BlogRequest extends FormRequest
             'seo_title.required'        => 'Tiêu đề SEO không được để trống!',
             'seo_description.required'  => 'Mô tả SEO không được để trống!',
             'seo_alias.required'        => 'Đường dẫn tĩnh không được để trống!',
+            'category.required'         => 'Chuyên mục không được để trống!',
             'rating_aggregate_count'    => 'Số lượt đánh giá không được để trống!',
             'rating_aggregate_star'     => 'Điểm đánh giá không được để trống!'
         ];
