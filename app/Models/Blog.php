@@ -138,6 +138,7 @@ class Blog extends Model {
                                 })
                                 ->with('pages', 'category.infoCategory')
                                 ->paginate($paginate);
+            // dd($result);
         }
         return $result;
     }
