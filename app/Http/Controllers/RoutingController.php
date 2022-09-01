@@ -34,7 +34,7 @@ class RoutingController extends Controller {
                     $xhtml = file_get_contents($pathCache);
                 }else {
                     $params             = [];
-                    $params['paginate'] = 2;
+                    $params['paginate'] = 10;
                     $searchName         = request('search_name') ?? null;
                     $params['search_name']  = $searchName;
                     $idCate             = $result['info']->id;
