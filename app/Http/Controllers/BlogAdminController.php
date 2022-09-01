@@ -63,10 +63,9 @@ class BlogAdminController extends Controller {
     }
 
     public function create(BlogRequest $request){
-        // try {
-        //     DB::beginTransaction();
+        try {
+            DB::beginTransaction();
             /* upload image */
-            dd($request->all());
             $dataPath           = [];
             if($request->hasFile('image')) {
                 $name           = !empty($request->get('seo_alias')) ? $request->get('seo_alias') : time();
@@ -84,22 +83,22 @@ class BlogAdminController extends Controller {
             $insertRelation     = $this->BuildModelService->buildArrayInsertUpdateTableRelationBlogCategory($request->all(), $idBlog);
             if(!empty($insertRelation)) RelationBlogCategory::deleteAndInsertItem($insertRelation);
 
-        //     DB::commit();
-        //     /* Message */
-        //     $message        = [
-        //         'type'      => 'success',
-        //         'message'   => '<strong>Thành công!</strong> Đã tạo bài viết mới'
-        //     ];
-        // } catch (\Exception $exception){
-        //     DB::rollBack();
-        //     /* Message */
-        //     $message        = [
-        //         'type'      => 'danger',
-        //         'message'   => '<strong>Thất bại!</strong> Có lỗi xảy ra, vui lòng thử lại'
-        //     ];
-        // }
-        // $request->session()->put('message', $message);
-        // return redirect()->route('admin.blog.view', ['id' => $idBlog]);
+            DB::commit();
+            /* Message */
+            $message        = [
+                'type'      => 'success',
+                'message'   => '<strong>Thành công!</strong> Đã tạo bài viết mới'
+            ];
+        } catch (\Exception $exception){
+            DB::rollBack();
+            /* Message */
+            $message        = [
+                'type'      => 'danger',
+                'message'   => '<strong>Thất bại!</strong> Có lỗi xảy ra, vui lòng thử lại'
+            ];
+        }
+        $request->session()->put('message', $message);
+        return redirect()->route('admin.blog.view', ['id' => $idBlog]);
     }
 
     public function update(BlogRequest $request){

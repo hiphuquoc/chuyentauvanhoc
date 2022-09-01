@@ -33,6 +33,43 @@ if (file_exists($maintenance = __DIR__.'/../storage/framework/maintenance.php'))
 
 require __DIR__.'/../vendor/autoload.php';
 
+function seo_redirect (\Illuminate\Http\Request $request) {
+    // $url            = $_SERVER['REQUEST_URI'];
+    // // $url            = preg_replace('#\?.*$#imsU', '', $url);
+    // $domain         = env('APP_URL');
+    // dd($domain);
+    // // xóa dấu / cuối APP_URL (nếu có)
+    // if(substr($domain, -1)==='/') $domain = substr($domain, 0, -1);
+    // // redirect nhiều / về một /
+    // if(preg_match('#\/\/+#imsU', $url)===1){
+    //     $url        = removeCharactor($url);
+    //     $fullUrl    = $domain.$url;
+    //     header("HTTP/1.1 301 Moved Permanently");
+    //     header("Location: " . $fullUrl);
+    //     exit();
+    // }
+    // redirect theo danh sách tùy biến
+	// $redirectUrls   = App\Http\Controllers\RedirectController::getDataRedirect();
+    // if(!empty($redirectUrls)) {
+    //     foreach ($redirectUrls as $urlOld => $urlNew) {
+    //         if($urlOld===$url){
+    //             $fullUrlNew    = $domain.$urlNew;
+    //             header("HTTP/1.1 301 Moved Permanently");
+    //             header("Location: " . $fullUrlNew);
+    //             exit();
+    //         }
+    //     }
+    // }
+}
+
+function removeCharactor($string){
+    if(preg_match('#\/\/+#imsU', $string)===1){
+        $string = str_replace('//', '/', $string);
+        $string = removeCharactor($string);
+    }
+    if(preg_match('#\/\/+#imsU', $string)===0) return $string;
+}
+
 /*
 |--------------------------------------------------------------------------
 | Run The Application
@@ -46,7 +83,11 @@ require __DIR__.'/../vendor/autoload.php';
 
 $app = require_once __DIR__.'/../bootstrap/app.php';
 
+
+
 $kernel = $app->make(Kernel::class);
+
+
 
 $response = $kernel->handle(
     $request = Request::capture()
