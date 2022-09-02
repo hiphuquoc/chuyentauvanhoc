@@ -1656,6 +1656,7 @@ a.more-link > i {
 }
 .nav-mobile_main > ul > li > ul > li ul {
   display: none;
+  margin-left: 0 !important;
 }
 
 .searchHeader {

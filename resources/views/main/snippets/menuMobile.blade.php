@@ -22,9 +22,12 @@
             $iconMore           = null;
             $menuChild          = null;
             if(!empty($item['child'])) {
-                // $iconMore       = '<span class="right-icon" onclick="javascript:showHideListMenuMobile(this);"><i class="fas fa-chevron-right"></i></span>';
                 // menu child
-                $menuChild      .= '<ul>';
+                $menuChild      = '<ul>';
+                if($item['name']=='Tài liệu'||$item['name']=='Đề thi'){
+                    $iconMore   = '<span class="right-icon" onclick="javascript:showHideListMenuMobile(this);"><i class="fas fa-chevron-right"></i></span>';
+                    $menuChild  = '<ul style="display:none;">';
+                }
                 foreach($item['child'] as $child){
                     $iconMore2  = null;
                     $menuChild2 = null;

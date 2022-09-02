@@ -1025,6 +1025,7 @@ $width-single-menu  : 260px;
                     > li {
                         ul {
                             display: none;
+                            margin-left: 0 !important;
                         }
                     }
                 }
