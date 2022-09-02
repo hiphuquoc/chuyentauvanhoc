@@ -57,13 +57,13 @@
                             @foreach($blogNLXH as $item)
                                 <div class="blogBoxFooter_item">
                                     <div class="blogBoxFooter_item_image">
-                                        <a href="/{{ $item->seo_alias_full }}">
-                                            <img src="/images/image-default-750x460.png" data-src="{{ $item->image_small }}" alt="{{ $item->title }}" title="{{ $item->title }}">
+                                        <a href="/{{ $item->pages->seo_alias_full }}">
+                                            <img src="/images/image-default-750x460.png" data-src="{{ $item->pages->image_small }}" alt="{{ $item->name }}" title="{{ $item->name }}">
                                         </a>
                                     </div>
                                     <div class="blogBoxFooter_item_content maxLine_2">
-                                        <a href="/{{ $item->seo_alias_full }}">
-                                            {{ $item->title }}
+                                        <a href="/{{ $item->pages->seo_alias_full }}">
+                                            {{ $item->name }}
                                         </a>
                                     </div>
                                 </div>

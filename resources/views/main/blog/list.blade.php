@@ -26,7 +26,7 @@
                 <div class="articleBox">
                     
                     @if($list->isNotEmpty())
-                        @foreach ($list->sortBy('pages.ordering')->sortByDesc('pages.created_at') as $item)
+                        @foreach ($list as $item)
                             <div class="articleBox_item">
                                 <a href="{{ url($item->pages->seo_alias) }}" class="articleBox_item_image">
                                     <img src="/images/image-default-750x460.png" data-src="{{ $item->pages->image_small }}" alt="{{ $item->name }}" title="{{ $item->name }}" />
@@ -55,7 +55,7 @@
                         <div style="margin-bottom:0.25rem;">Không tìm thấy nội dung phù hợp!</div>
                     @endif
 
-                    {{ !empty($list) ? $list->appends(request()->query())->links('main.blog.paginate') : '' }}
+                    {{-- {{ !empty($list) ? $list->appends(request()->query())->links('main.blog.paginate') : '' }} --}}
 
                 </div>
             </div>

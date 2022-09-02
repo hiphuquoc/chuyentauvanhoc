@@ -15,7 +15,7 @@ class Blog extends Model {
         'page_id',
         'note'
     ];
-    public $timestamps      = false;
+    public $timestamps      = true;
 
     /* ============= ADMIN */
     public static function getListAdmin($params = null){
@@ -35,8 +35,8 @@ class Blog extends Model {
                                     $query->where('outstanding', $outstanding);
                                 })
                                 ->with('pages', 'category.infoCategory')
-                                ->get()
-                                ->sortByDesc('pages.created_at');
+                                ->orderBy('created_at', 'DESC')
+                                ->get();
         return $result;
     }
     /* ============= FRONTEND */
@@ -61,6 +61,7 @@ class Blog extends Model {
                                     $query->limit($limit);
                                 })
                                 ->with('pages', 'category.infoCategory')
+                                ->orderBy('id', 'DESC')
                                 ->paginate($paginate);
         return $result;
     }
@@ -91,32 +92,13 @@ class Blog extends Model {
     public static function getListBySeoAliasCategory($seoAlias, $params = null){
         $result             = null;
         if(!empty($seoAlias)){
-            /* lấy id category */
-            $tmp            = DB::table('seo')
-                                ->join('categories_info', 'categories_info.page_id', '=', 'seo.id')
-                                ->select('categories_info.id')
-                                ->first();
-            if(!empty($tmp->id)){
-                /* lấy danh sách blog */
-                $paginate       = $params['paginate'] ?? null;
-                $limit          = $params['limit'] ?? 0;
-                $result         = DB::table('seo')
-                                    ->join('blogs_info', 'seo.id', '=', 'blogs_info.page_id')
-                                    ->join('relation_blog_category', 'relation_blog_category.blog_info_id', '=', 'blogs_info.id')
-                                    ->join('categories_info', 'categories_info.id', '=', 'relation_blog_category.category_info_id')
-                                    ->select(array_merge(config('column.blogs_info'), config('column.seo')))
-                                    ->distinct()
-                                    ->where('categories_info.id', $tmp->id)
-                                    ->orderBy('seo.ordering', 'ASC')
-                                    ->orderBy('seo.created_at', 'DESC')
-                                    ->when($paginate, function($query) use ($paginate){
-                                        $query->paginate($paginate);
-                                    })
-                                    ->when($limit, function($query) use ($limit){
-                                        $query->limit($limit);
-                                    })
-                                    ->get();
-            }
+            $result     = Blog::select('*')
+                            ->whereHas('category.infoCategory.pages', function($query) use($seoAlias){
+                                $query->where('seo_alias', $seoAlias);
+                            })
+                            ->with('pages')
+                            ->orderBy('id', 'DESC')
+                            ->get();
         }
         return $result;
     }
@@ -137,14 +119,15 @@ class Blog extends Model {
                                     $query->whereNotIn('id', $arrayIdNot);
                                 })
                                 ->with('pages', 'category.infoCategory')
+                                ->orderBy('id', 'DESC')
+                                ->orderBy('ordering', 'DESC')
                                 ->paginate($paginate);
-            // dd($result);
         }
         return $result;
     }
 
     public static function getInfoBySeoAlias($value){
-        $result         = [];
+        $result             = [];
         if(!empty($value)){
             $result         = DB::table('seo')
                                 ->join('blogs_info', 'blogs_info.page_id', '=', 'seo.id')

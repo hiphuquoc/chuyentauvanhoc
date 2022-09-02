@@ -90,6 +90,7 @@ class BuildModelService {
             + note
             + content
             + outstanding
+            + ordering
             + download
         */
         $result                             = [];
@@ -103,6 +104,7 @@ class BuildModelService {
             if(!empty($dataForm['outstanding'])) {
                 if($dataForm['outstanding']=='on') $result['outstanding'] = 1;
             }
+            $result['ordering']             = $dataForm['ordering'] ?? null;
             $result['download']             = 0;
             if(!empty($dataForm['download'])) {
                 if($dataForm['download']=='on') $result['download'] = 1;

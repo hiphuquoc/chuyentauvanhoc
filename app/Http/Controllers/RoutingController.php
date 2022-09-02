@@ -27,7 +27,8 @@ class RoutingController extends Controller {
             $result     = $this->UrlService->checkUrlType($arraySlug);
             if($result['type']=='category'){   // ====== CATEGORY =============================
                 /* cache */
-                $nameCache              = self::buildNameCacheBySeoAlias($result['info']->seo_alias_full).'-page-'.request("page").'.'.config('admin.cache.extension');
+                $cacheOfPage            = request("page") ?? 0;
+                $nameCache              = self::buildNameCacheBySeoAlias($result['info']->seo_alias_full).'-page-'.$cacheOfPage.'.'.config('admin.cache.extension');
                 $pathCache              = Storage::path(config('admin.cache.folderSave')).$nameCache;
                 $cacheTime    	        = 1800;
                 if(file_exists($pathCache)&&$cacheTime>(time() - filectime($pathCache))){
