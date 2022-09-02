@@ -940,7 +940,7 @@ $width-single-menu  : 260px;
     }
         
     &_main {
-        flex: 0 0 300px;
+        flex: 0 0 320px;
         background: #fff;
         padding: 15px;
         
@@ -955,15 +955,21 @@ $width-single-menu  : 260px;
             text-shadow: 1px 1px 1px $bg-03;
         }
             
-        > ul {
+        ul {
             margin-left: 0;
             padding-left: 0;
             li {
                 list-style: none;
+                font-size: 15.5px;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                align-items: center;
+                
                 > a, > div {
                     color: #567 !important;
                     display: block;
-                    padding: 14px 0;
+                    padding: 10px 0;
                     width: calc(100% - 40px);
                     
                     i {
@@ -989,28 +995,38 @@ $width-single-menu  : 260px;
                         font-size: 0.8rem;
                     }
                 }
-                    
+                > ul {
+                    padding-left: 30px;
+                    width: 100%;
+                }
                 ul {
-                    margin-left: 20px;
+                    margin-left: 10px;
+                    border-left: 1px dashed $bg-04;
+                    > li {
+                        position: relative;
+                        &:before {
+                            position: absolute;
+                            color: $bg-04;
+                            top: 0.75rem;
+                            left: -1.75rem;
+                            content: "---";
+                            font-size: 0.8rem;
+                        }
+                    }
                 }
             }
-        }  
+        }
         > ul {
             > li {
-                font-size: 15.5px;
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: space-between;
-                align-items: center;
-                    
-                &:not(:last-child){
-                    border-bottom: 1px solid $bg-03;
-                }
-                
+                // &:not(:last-child){
+                //     border-bottom: 1px solid $color-primary-03;
+                // }
                 > ul {
-                    padding-left: 20px;
-                    display: none;
-                    width: 100%;
+                    > li {
+                        ul {
+                            display: none;
+                        }
+                    }
                 }
             }
         }

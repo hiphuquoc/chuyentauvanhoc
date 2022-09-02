@@ -22,14 +22,28 @@
             $iconMore           = null;
             $menuChild          = null;
             if(!empty($item['child'])) {
-                $iconMore       = '<span class="right-icon" onclick="javascript:showHideListMenuMobile(this);"><i class="fas fa-chevron-right"></i></span>';
+                // $iconMore       = '<span class="right-icon" onclick="javascript:showHideListMenuMobile(this);"><i class="fas fa-chevron-right"></i></span>';
                 // menu child
                 $menuChild      .= '<ul>';
                 foreach($item['child'] as $child){
+                    $iconMore2  = null;
+                    $menuChild2 = null;
+                    if(!empty($child['child'])){
+                        $menuChild2 = '<ul>';
+                        foreach($child['child'] as $child2) {
+                            $iconMore2  = '<span class="right-icon" onclick="javascript:showHideListMenuMobile(this);"><i class="fas fa-chevron-right"></i></span>';
+                            $menuChild2 .= '<li>
+                                                <a href="/'.$child2['url'].'">'.$child2['name'].'</a>
+                                            </li>';
+                        }
+                        $menuChild2 .= '</ul>';
+                    }
                     $menuChild  .= '<li>
                                     <a href="/'.$child['url'].'">
                                         <div>'.$child['name'].'</div>
                                     </a>
+                                    '.$iconMore2.'
+                                    '.$menuChild2.'
                                 </li>';
                 }
                 $menuChild      .= '</ul>';
@@ -49,7 +63,7 @@
 <div id="nav-mobile" style="display:none;">
     <div class="nav-mobile">
         <div class="nav-mobile_bg" onclick="javascript:openCloseElemt('nav-mobile');"></div>
-        <div class="nav-mobile_main custom-scrollBar_y">
+        <div class="nav-mobile_main customScrollBar-y">
             <div class="nav-mobile_main__exit" onclick="javascript:openCloseElemt('nav-mobile');">
                 <i class="fas fa-times"></i>
             </div>

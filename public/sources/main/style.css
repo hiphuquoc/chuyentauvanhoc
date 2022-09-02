@@ -1581,7 +1581,7 @@ a.more-link > i {
   cursor: pointer;
 }
 .nav-mobile_main {
-  flex: 0 0 300px;
+  flex: 0 0 320px;
   background: #fff;
   padding: 15px;
 }
@@ -1595,26 +1595,31 @@ a.more-link > i {
   color: #678;
   text-shadow: 1px 1px 1px #e9ecef;
 }
-.nav-mobile_main > ul {
+.nav-mobile_main ul {
   margin-left: 0;
   padding-left: 0;
 }
-.nav-mobile_main > ul li {
+.nav-mobile_main ul li {
   list-style: none;
+  font-size: 15.5px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
 }
-.nav-mobile_main > ul li > a, .nav-mobile_main > ul li > div {
+.nav-mobile_main ul li > a, .nav-mobile_main ul li > div {
   color: #567 !important;
   display: block;
-  padding: 14px 0;
+  padding: 10px 0;
   width: calc(100% - 40px);
 }
-.nav-mobile_main > ul li > a i, .nav-mobile_main > ul li > div i {
+.nav-mobile_main ul li > a i, .nav-mobile_main ul li > div i {
   margin-right: 20px;
   font-size: 16px;
   color: #789;
   width: 15px;
 }
-.nav-mobile_main > ul li > span {
+.nav-mobile_main ul li > span {
   width: 40px;
   height: 40px;
   background: #f8f9fa;
@@ -1623,30 +1628,34 @@ a.more-link > i {
   line-height: 40px;
   border-radius: 5px;
 }
-.nav-mobile_main > ul li > span:hover {
+.nav-mobile_main ul li > span:hover {
   background: #e9ecef;
 }
-.nav-mobile_main > ul li > span i {
+.nav-mobile_main ul li > span i {
   margin: 0;
   font-size: 0.8rem;
 }
-.nav-mobile_main > ul li ul {
-  margin-left: 20px;
-}
-.nav-mobile_main > ul > li {
-  font-size: 15.5px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-}
-.nav-mobile_main > ul > li:not(:last-child) {
-  border-bottom: 1px solid #e9ecef;
-}
-.nav-mobile_main > ul > li > ul {
-  padding-left: 20px;
-  display: none;
+.nav-mobile_main ul li > ul {
+  padding-left: 30px;
   width: 100%;
+}
+.nav-mobile_main ul li ul {
+  margin-left: 10px;
+  border-left: 1px dashed #dee2e6;
+}
+.nav-mobile_main ul li ul > li {
+  position: relative;
+}
+.nav-mobile_main ul li ul > li:before {
+  position: absolute;
+  color: #dee2e6;
+  top: 0.75rem;
+  left: -1.75rem;
+  content: "---";
+  font-size: 0.8rem;
+}
+.nav-mobile_main > ul > li > ul > li ul {
+  display: none;
 }
 
 .searchHeader {

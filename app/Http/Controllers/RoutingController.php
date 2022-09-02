@@ -26,14 +26,14 @@ class RoutingController extends Controller {
             /* Xử lý tiếp */
             $result     = $this->UrlService->checkUrlType($arraySlug);
             if($result['type']=='category'){   // ====== CATEGORY =============================
-                /* cache */
+                // /* cache */
                 $cacheOfPage            = request("page") ?? 0;
                 $nameCache              = self::buildNameCacheBySeoAlias($result['info']->seo_alias_full).'-page-'.$cacheOfPage.'.'.config('admin.cache.extension');
-                $pathCache              = Storage::path(config('admin.cache.folderSave')).$nameCache;
-                $cacheTime    	        = 1800;
-                if(file_exists($pathCache)&&$cacheTime>(time() - filectime($pathCache))){
-                    $xhtml = file_get_contents($pathCache);
-                }else {
+                // $pathCache              = Storage::path(config('admin.cache.folderSave')).$nameCache;
+                // $cacheTime    	        = 1800;
+                // if(file_exists($pathCache)&&$cacheTime>(time() - filectime($pathCache))){
+                //     $xhtml = file_get_contents($pathCache);
+                // }else {
                     $params             = [];
                     $params['paginate'] = 10;
                     $searchName         = request('search_name') ?? null;
@@ -53,7 +53,7 @@ class RoutingController extends Controller {
                     $category           = Category::getAllCategoryByTree();
                     $xhtml              = view('main.blog.list', compact('breadcrumb', 'list', 'info', 'category', 'outstanding', 'searchName'))->render();
                     if($result['info']->seo_alias!='tim-kiem') Storage::put(config('admin.cache.folderSave').$nameCache, $xhtml);
-                }
+                // }
                 echo $xhtml;
             }else if($result['type']==='blog'){ // ====== BLOG =============================
                 /* cache */

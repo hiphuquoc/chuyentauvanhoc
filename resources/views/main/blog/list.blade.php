@@ -55,7 +55,7 @@
                         <div style="margin-bottom:0.25rem;">Không tìm thấy nội dung phù hợp!</div>
                     @endif
 
-                    {{-- {{ !empty($list) ? $list->appends(request()->query())->links('main.blog.paginate') : '' }} --}}
+                    {{ !empty($list) ? $list->appends(request()->query())->links('main.blog.paginate') : '' }}
 
                 </div>
             </div>
