@@ -25,7 +25,9 @@ class CategoryAdminController extends Controller {
 
     public function view(Request $request){
         $id             = $request->get('id') ?? 0;
-        $category       = Category::all();
+        $parents        = Category::select('*')
+                            ->with('pages')
+                            ->get();
         $item           = Category::select('*')
                             ->where('id', $id)
                             ->with('pages')
@@ -33,7 +35,7 @@ class CategoryAdminController extends Controller {
         /* type */
         $type           = !empty($item) ? 'edit' : 'create';
         $type           = $request->get('type') ?? $type;
-        return view('admin.category.view', compact('category', 'item', 'type'));
+        return view('admin.category.view', compact('parents', 'item', 'type'));
     }
 
     public function create(CategoryRequest $request){
@@ -115,8 +117,6 @@ class CategoryAdminController extends Controller {
             foreach($child as $item){
                 /* update level bảng seo */
                 Seo::updateItem($item->id, ['level' => $levelChild]);
-                /* update level bảng category_info */
-                Category::select('*')->where('page_id', $item->id)->update(['category_level' => $levelChild]);
                 /* update tiếp phẩn tử con */
                 $this->updateLevelChild($item->id);
             }

@@ -18,7 +18,7 @@
          <div class="pageContent_content">
 
             <!-- ===== START:: H1 Title Blog ===== -->
-            <h1 class="siteTitleBlog">{{ $info->title ?? null }}</h1>
+            <h1 class="siteTitleBlog">{{ $info->pages->title ?? null }}</h1>
             <!-- ===== END:: H1 Title Blog ===== -->
 
             <!-- ===== START:: Social Box ===== -->
@@ -28,8 +28,8 @@
             <!-- ===== START:: Content Blog ===== -->
             @if(!empty($info->content))
                <div class="backgroundFull js_buildTocContent_content" style="text-align:justify;">
-                  @if(!empty($info->image))
-                     <img src="{{ $info->image }}" src="{{ $info->title }}" title="{{ $info->title }}" style="margin-bottom:1rem;width:100%;" />
+                  @if(!empty($info->pages->image))
+                     <img src="{{ $info->pages->image }}" src="{{ $info->pages->title }}" title="{{ $info->pages->title }}" style="margin-bottom:1rem;width:100%;" />
                   @endif
                   
                   <div id="tocContent"></div>

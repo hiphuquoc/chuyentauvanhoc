@@ -16,19 +16,16 @@ class RoutingController extends Controller {
 
     public function routing($slug, $slug2 = null, $slug3 = null, $slug4 = null, $slug5 = null){
         $tmpSlug        = [$slug, $slug2, $slug3, $slug4, $slug5];
-
         // loại bỏ phần tử rỗng
         $arraySlug      = [];
         foreach($tmpSlug as $slug) if(!empty($slug)) $arraySlug[] = $slug;
         // check url có tồn tại?
-        $checkExists    = $this->UrlService->checkUrlExists($arraySlug);
-        if(!empty($checkExists)){
-            /* Xử lý tiếp */
-            $result     = $this->UrlService->checkUrlType($arraySlug);
+        $result         = $this->UrlService->checkUrlExists($arraySlug);
+        if(!empty($result)){
             if($result['type']=='category'){   // ====== CATEGORY =============================
-                // /* cache */
+                /* cache */
                 $cacheOfPage            = request("page") ?? 0;
-                $nameCache              = self::buildNameCacheBySeoAlias($result['info']->seo_alias_full).'-page-'.$cacheOfPage.'.'.config('admin.cache.extension');
+                $nameCache              = self::buildNameCacheBySeoAlias($result['info']->pages->seo_alias_full).'-page-'.$cacheOfPage.'.'.config('admin.cache.extension');
                 $pathCache              = Storage::path(config('admin.cache.folderSave')).$nameCache;
                 $cacheTime    	        = 1800;
                 if(file_exists($pathCache)&&$cacheTime>(time() - filectime($pathCache))){
@@ -42,9 +39,9 @@ class RoutingController extends Controller {
                     $info               = $result['info'] ?? [];
                     $type               = $result['type'];
                     /* lấy thông tin breadcrumd */
-                    $breadcrumb         = Url::buildArrayBreadcrumb($info, $type);
+                    $breadcrumb         = Url::buildArrayBreadcrumb($info);
                     /* tạo mảng array category parent + child of child */
-                    $arrayCategoryId    = Category::getArrayCategoryChildById($idCate);
+                    $arrayCategoryId    = Category::getArrayCategoryChildById($info->id, $info->pages->id);
                     /* Lấy danh sách blog */
                     $list               = Blog::getListByArrayIdCategory($arrayCategoryId, $params);
                     /* Lấy blog nổi bật */
@@ -57,7 +54,7 @@ class RoutingController extends Controller {
                 echo $xhtml;
             }else if($result['type']==='blog'){ // ====== BLOG =============================
                 /* cache */
-                $nameCache              = self::buildNameCacheBySeoAlias($result['info']->seo_alias_full).'.'.config('admin.cache.extension');
+                $nameCache              = self::buildNameCacheBySeoAlias($result['info']->pages->seo_alias_full).'.'.config('admin.cache.extension');
                 $pathCache              = Storage::path(config('admin.cache.folderSave')).$nameCache;
                 $cacheTime    	        = 1800;
                 if(file_exists($pathCache)&&$cacheTime>(time() - filectime($pathCache))){
@@ -67,7 +64,7 @@ class RoutingController extends Controller {
                     $info               = $result['info'] ?? [];
                     $type               = $result['type'];
                     /* lấy thông tin breadcrumd */
-                    $breadcrumb         = Url::buildArrayBreadcrumb($info, $type);
+                    $breadcrumb         = Url::buildArrayBreadcrumb($info);
                     /* Lấy blog nổi bật */
                     $outstanding        = Blog::getList(['outstanding' => 1]);
                     /* Lấy danh sách category phân cấp theo tree */

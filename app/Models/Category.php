@@ -26,55 +26,53 @@ class Category extends Model {
         return $result;
     }
 
-    public static function getInfoBySeoAlias($value){
+    public static function getInfoBySeoAlias($seoAlias){
         $result         = [];
-        if(!empty($value)){
-            $result     = DB::table('categories_info')
-                        ->join('seo', 'seo.id', '=', 'categories_info.page_id')
-                        ->select(array_merge(config('column.categories_info'), config('column.seo')))
-                        ->where('seo.seo_alias', $value)
-                        ->first();
+        if(!empty($seoAlias)){
+            $result     = Category::select('*')
+                            ->whereHas('pages', function($query) use($seoAlias){
+                                $query->where('seo_alias', $seoAlias);
+                            })
+                            ->with('pages')
+                            ->first();
         }
         return $result;
     }
 
-    public static function getArrayCategoryChildById($idCate){
-        $result         = [];
-        if(!empty($idCate)){
+    public static function getArrayCategoryChildById($idCate, $idPage){
+        $result                 = [];
+        if(!empty($idPage)){
             /* phần tử đầu tiên là Category cha */
-            $result[]   = $idCate;
-            $child1     = self::getInfoCategoryChildById($idCate);
-            if(!empty($child1)){
-                foreach($child1 as $c1){
-                    /* cho phần tử con cấp tiếp theo (c1) vào mảng */
-                    $result[]   = $c1['id'];
-                    $child2     = self::getInfoCategoryChildById($c1['id']);
-                    if(!empty($child2)){
-                        /* cho phần tử con cấp tiếp theo (c2) vào mảng */
-                        foreach($child2 as $c2) {
-                            $result[]   = $c2['id'];
-                            $child3     = self::getInfoCategoryChildById($c2['id']);
-                            if(!empty($child3)){
-                                foreach($child3 as $c3){
-                                    $result[]   = $c3['id'];
-                                }
+            $result[]           = $idCate;
+            $childs1            = self::getInfoCategoryChildById($idPage);
+            if($childs1->isNotEmpty()){
+                foreach($childs1 as $child1){
+                    $result[]   = $child1->id;
+                    $childs2    = self::getInfoCategoryChildById($child1->pages->id);
+                    if($childs2->isNotEmpty()){
+                        foreach($childs2 as $child2){
+                            $result[]   = $child2->id;
+                            $childs3    = self::getInfoCategoryChildById($child2->pages->id);
+                            if($childs3->isNotEmpty()){
+                                foreach($childs3 as $child3) $result[]  = $child3->id;
                             }
                         }
-                    } 
-                    /* lấy 3 cấp category tiếp theo */
+                    }
                 }
             }
         }
-        return $result;
+        return array_unique($result);
     }
 
-    private static function getInfoCategoryChildById($idCate){
+    private static function getInfoCategoryChildById($idPage){
         $result         = [];
-        if(!empty($idCate)){
+        if(!empty($idPage)){
             $result     = self::select('*')
-                            ->where('category_parent', $idCate)
-                            ->get()
-                            ->toArray();
+                            ->whereHas('pages', function($query) use($idPage){
+                                $query->where('parent', $idPage);
+                            })
+                            ->with('pages')
+                            ->get();
         }
         return $result;
     }

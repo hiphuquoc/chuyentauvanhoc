@@ -2,88 +2,30 @@
 
 namespace App\Helpers;
 
-use App\Models\Category;
+use App\Models\Seo;
 use Illuminate\Support\Facades\DB;
 
 class Url {
-    public static function buildFullLinkArray($arrayData){
-        if(!empty($arrayData)){
-            $infoSeo    = DB::table('seo')
-                        ->select(array_merge(['id'], config('column.seo')))
-                        ->get()
-                        ->toArray();
-            for($i=0;$i<count($arrayData);++$i){
-                $url                = $arrayData[$i]->seo_alias;
-                $parent             = $arrayData[$i]->parent;
-                for($j=1;$j<$arrayData[$i]->level;++$j){
-                    foreach($infoSeo as $item){
-                        if($item->id==$parent) {
-                            $url    = $item->seo_alias.'/'.$url;
-                            $parent = $item->parent;
-                        }
-                    }
-                }
-                $arrayData[$i]->seo_alias_full    = $url;
-            }
-        }
-        return $arrayData;
-    }
 
-    public static function buildFullLinkOne($data){
-        if(!empty($data)){
-            $infoSeo    = DB::table('seo')
-                        ->select(array_merge(['id'], config('column.seo')))
-                        ->get()
-                        ->toArray();
-            $url                = $data->seo_alias;
-            $parent             = $data->parent;
-            for($j=1;$j<$data->level;++$j){
-                foreach($infoSeo as $item){
-                    if($item->id==$parent) {
-                        $url    = $item->seo_alias.'/'.$url;
-                        $parent = $item->parent;
-                    }
-                }
-            }
-            $data->seo_alias_full    = $url;
-        }
-        return $data;
-    }
-
-    public static function buildArrayBreadcrumb($data, $type = 'category'){
+    public static function buildArrayBreadcrumb($data){
         $result         = [];
         if(!empty($data)){
-            $result[]   = $data;
-            $infoSeo    = DB::table('seo')
-                        ->select(array_merge(['id'], config('column.seo')))
-                        ->get()
-                        ->toArray();
-            if($type==='category'){
-                $parent                 = $data->parent;
-                for($i=1;$i<$data->level;++$i){
-                    foreach($infoSeo as $item){
-                        if($item->id==$parent) {
-                            $parent     = $item->parent;
-                            $result[]   = $item;
-                        }
+            $result[]   = $data->pages;
+            $infoSeo    = Seo::select('*')
+                            ->get();
+            $parent                 = $data->pages->parent;
+            for($i=1;$i<$data->pages->level;++$i){
+                foreach($infoSeo as $page){
+                    if($page->id==$parent) {
+                        $parent     = $page->parent;
+                        $result[]   = $page;
+                        break;
                     }
-                }
-            }else if($type==='blog'){
-                $tmp    = Category::getListCategoryByBlogId($data->id);
-                if(!empty($tmp)){
-                    $infoCategoryNear   = $tmp[0];
-                    foreach($tmp as $t){
-                        if($t->level > $infoCategoryNear->level) $infoCategoryNear = $t;
-                    }
-                    /* gọi ngược lại để buil arrray category */
-                    $result             = self::buildArrayBreadcrumb($infoCategoryNear, 'category');
                 }
             }
             /* sắp xếp theo level */
             $level = array_column($result, 'level');
             array_multisort($level, SORT_ASC, $result);
-            /* nếu là blog thì ghép thêm data blog vào */
-            if($type==='blog') $result[] = $data;
         }
         return $result;
     }

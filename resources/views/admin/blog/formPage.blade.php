@@ -44,8 +44,8 @@
                 <label class="form-label" for="category">Category</label>
             </span>
             <select class="select2 form-select select2-hidden-accessible" id="category" name="category[]" aria-hidden="true" multiple="true">
-                @if(!empty($categoryAll))
-                    @foreach($categoryAll as $c)
+                @if(!empty($parents))
+                    @foreach($parents as $c)
                         @php
                             $selected       = null;
                             if(!empty($category)){

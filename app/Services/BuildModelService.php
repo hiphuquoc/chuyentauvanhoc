@@ -30,13 +30,15 @@ class BuildModelService {
             $result['description']              = $dataForm['description'] ?? null;
             if(!empty($dataPath['filePathNormal'])) $result['image']           = $dataPath['filePathNormal'];
             if(!empty($dataPath['filePathSmall']))  $result['image_small']     = $dataPath['filePathSmall'];
-            // page level
+            /* page level */
             $pageLevel                          = 1;
             $pageParent                         = 0;
             if(!empty($dataForm['parent'])){
-                $infoPageParent                 = Category::find($dataForm['parent'])->pages;
+                $infoPageParent                 = Seo::select('*')
+                                                    ->where('id', $dataForm['parent'])
+                                                    ->first();
                 $pageLevel                      = !empty($infoPageParent->level) ? ($infoPageParent->level+1) : $pageLevel;
-                $pageParent                     = $infoPageParent->id;
+                $pageParent                     = $infoPageParent->id ?? $pageParent;
             }
             $result['level']                    = $pageLevel;
             $result['parent']                   = $pageParent;
@@ -61,23 +63,12 @@ class BuildModelService {
             + name
             + description
             + page_id
-            + category_level
-            + category_parent
         */
         $result                             = [];
         if(!empty($dataForm)){
             $result['name']                 = $dataForm['title'] ?? null;
             $result['description']          = $dataForm['description'] ?? null;
             if(!empty($pageId)) $result['page_id'] = $pageId;
-            $categoryLevel                  = 1;
-            $categoryParent                 = 0;
-            if(!empty($dataForm['parent'])){
-                $infoPageParent             = Category::find($dataForm['parent']);
-                $categoryLevel              = !empty($infoPageParent->category_level) ? ($infoPageParent->category_level+1) : $categoryLevel;
-                $categoryParent             = $infoPageParent->id;
-            }
-            $result['category_level']       = $categoryLevel;
-            $result['category_parent']      = $categoryParent;
         }
         return $result;
     }

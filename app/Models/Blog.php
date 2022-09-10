@@ -126,13 +126,14 @@ class Blog extends Model {
         return $result;
     }
 
-    public static function getInfoBySeoAlias($value){
+    public static function getInfoBySeoAlias($seoAlias){
         $result             = [];
-        if(!empty($value)){
-            $result         = DB::table('seo')
-                                ->join('blogs_info', 'blogs_info.page_id', '=', 'seo.id')
-                                ->select(array_merge(config('column.blogs_info'), config('column.seo')))
-                                ->where('seo.seo_alias', $value)
+        if(!empty($seoAlias)){
+            $result         = Blog::select('*')
+                                ->whereHas('pages', function($query) use($seoAlias){
+                                    $query->where('seo_alias', $seoAlias);
+                                })
+                                ->with('pages')
                                 ->first();
         }
         return $result;

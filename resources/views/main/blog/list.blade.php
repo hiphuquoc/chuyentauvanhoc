@@ -17,7 +17,7 @@
             <div class="pageContent_content background">
             
                 <h1 class="siteTitlePage">
-                    {{ $info->title ?? null }}
+                    {{ $info->pages->title ?? null }}
                     @if(!empty($searchName))
                     theo: "{{ $searchName }}"
                     @endif
@@ -28,11 +28,11 @@
                     @if($list->isNotEmpty())
                         @foreach ($list as $item)
                             <div class="articleBox_item">
-                                <a href="{{ url($item->pages->seo_alias) }}" class="articleBox_item_image">
+                                <a href="{{ url($item->pages->seo_alias_full) }}" class="articleBox_item_image">
                                     <img src="/images/image-default-750x460.png" data-src="{{ $item->pages->image_small }}" alt="{{ $item->name }}" title="{{ $item->name }}" />
                                 </a>
                                 <div class="articleBox_item_content">
-                                    <a href="{{ url($item->pages->seo_alias) }}" class="articleBox_item_content_title">
+                                    <a href="{{ url($item->pages->seo_alias_full) }}" class="articleBox_item_content_title">
                                         <h2 class="maxLine_2">{{ $item->name }}</h2>
                                     </a>
                                     <div class="articleBox_item_content_subtitle">

@@ -6,10 +6,10 @@
         "@id":"{{ env('APP_URL') }}",
         "inLanguage":"vi",
         "headline":"{{ env('APP_URL') }} Article",
-        "datePublished":"{{ date('c', strtotime($info->created_at)) }}",
-        "dateModified":"{{ date('c', strtotime($info->updated_at)) }}",
-        "name":"{{ $info->seo_title }}",
-        "description":"{{ $info->seo_description }}",
+        "datePublished":"{{ !empty($info->pages->created_at) ? date('c', strtotime($info->pages->created_at)) : date('c', strtotime($info->created_at)) }}",
+        "dateModified":"{{ !empty($info->pages->updated_at) ? date('c', strtotime($info->pages->updated_at)) : date('c', strtotime($info->updated_at)) }}",
+        "name":"{{ $info->pages->seo_title ?? $info->seo_title }}",
+        "description":"{{ $info->pages->seo_description ?? $info->seo_description }}",
         "url": "{{ url()->current() }}",
         "mainEntityOfPage":{
             "@type":"WebPage",
@@ -21,7 +21,7 @@
         },
         "image":{
             "@type": "ImageObject",
-            "url":"{{ public_path($info->image) }}",
+            "url":"{{ !empty($info->pages->image) ? public_path($info->pages->image) : public_path($info->image) }}",
             "width":"750",
             "height":"460"
         },
@@ -51,12 +51,12 @@
         {
             "@context": "https://schema.org/",
             "@type": "CreativeWorkSeries",
-            "name": "{{ $info->seo_title }}",
+            "name": "{{ $info->pages->seo_title ?? $info->seo_title }}",
             "aggregateRating": {
                 "@type": "AggregateRating",
-                "ratingValue": "{{ $info->rating_aggregate_star }}",
+                "ratingValue": "{{ $info->pages->rating_aggregate_star ?? $info->rating_aggregate_star }}",
                 "bestRating": "5",
-                "ratingCount": "{{ $info->rating_aggregate_count }}"
+                "ratingCount": "{{ $info->pages->rating_aggregate_count ?? $info->rating_aggregate_count }}"
             }
         }
     </script>
@@ -103,7 +103,7 @@
                     {
                         "@type": "ListItem",
                         "position": {{ $loop->index }},
-                        "url": "{{ env('APP_URL') }}/{{ $item->pages->seo_alias }}"
+                        "url": "{{ env('APP_URL') }}/{{ $item->pages->seo_alias_full ?? $item->seo_alias_full }}"
                     }
                 @endforeach
             ]

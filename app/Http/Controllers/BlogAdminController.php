@@ -39,7 +39,9 @@ class BlogAdminController extends Controller {
     public function view(Request $request){
         /* Category cho selectbox */
         $id                 = $request->get('id') ?? 0;
-        $categoryAll        = Category::all();
+        $parents            = Category::select('*')
+                                ->with('pages')
+                                ->get();
         /* Thông tin blog */
         $item               = Blog::select('*')
                                 ->where('id', $id)
@@ -59,7 +61,7 @@ class BlogAdminController extends Controller {
         /* type */
         $type               = !empty($item) ? 'edit' : 'create';
         $type               = $request->get('type') ?? $type;
-        return view('admin.blog.view', compact('categoryAll', 'category', 'item', 'type', 'blogInCategory'));
+        return view('admin.blog.view', compact('category', 'parents', 'item', 'type', 'blogInCategory'));
     }
 
     public function create(BlogRequest $request){

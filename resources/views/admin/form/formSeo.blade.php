@@ -47,6 +47,27 @@
             <div class="invalid-feedback">{{ config('admin.massage_validate.not_empty') }}</div>
         </div>
         <!-- One Row -->
+        @if(!empty($parents))
+        <div class="formBox_full_item">
+            <span data-toggle="tooltip" data-placement="top" title="
+                Là trang cha chứa trang hiện tại... URL cũng sẽ được hiển thị theo cấp cha - con
+            ">
+                <i class="explainInput" data-feather='alert-circle'></i>
+                <label class="form-label" for="parent">Trang cha</label>
+            </span>
+            <select class="select2 form-select select2-hidden-accessible" id="parent" name="parent">
+                <option value="0">- Lựa chọn -</option>
+                @foreach($parents as $page)
+                    @php
+                        $selected   = null;
+                        if(!empty($item->pages->parent)&&$item->pages->parent==$page->pages->id) $selected = 'selected';
+                    @endphp
+                    <option value="{{ $page->pages->id }}" {{ $selected }}>{{ $page->pages->title }}</option>
+                @endforeach
+            </select>
+        </div>
+        @endif
+        <!-- One Row -->
         <div class="formBox_column2_item_row">
             <span data-toggle="tooltip" data-placement="top" title="
                 Đây là Số lượt đánh giá của trang Category này được hiển thị trên trang website và ngoài Google để thể hiện sự uy tín của Category (tự nhập tùy thích)

@@ -34,7 +34,7 @@
             <textarea class="form-control" id="description"  name="description" rows="5" required>{{ old('description') ?? $item->pages['description'] ?? '' }}</textarea>
             <div class="invalid-feedback">{{ config('admin.massage_validate.not_empty') }}</div>
         </div>
-        <!-- One Row -->
+        {{-- <!-- One Row -->
         <div class="formBox_column2_item_row">
             <span data-toggle="tooltip" data-placement="top" title="
                 Chọn một Category khác làm Category cha
@@ -65,7 +65,7 @@
                     @endforeach
                 @endif
             </select>
-        </div>
+        </div> --}}
         <!-- One Row -->
         <div class="formBox_column2_item_row">
             <span data-toggle="tooltip" data-placement="top" title="

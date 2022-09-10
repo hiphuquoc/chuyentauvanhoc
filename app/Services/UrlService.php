@@ -6,33 +6,24 @@ use App\Models\Category;
 use App\Models\Seo;
 use App\Models\Blog;
 
+use App\Helpers\Url;
+
 class UrlService {
 
     public static function checkUrlExists($arrayUrl){
-        $urlFull        = null;
-        if(!empty($arrayUrl)){
-            $urlEnd     = end($arrayUrl);
-            $urlInput   = implode('/', $arrayUrl);
-            $urlCheck   = self::buildFullUrlFormUrl($urlEnd);
-            if($urlInput===$urlCheck) return $urlCheck;
-        }
-        return $urlFull;
-    }
-
-    public static function checkUrlType($arrayUrl){
         $result         = null;
-        // dd($arrayUrl);
         if(!empty($arrayUrl)){
+            $urlFull    = implode('/', $arrayUrl);
             /* Check Category */
             $tmp        = Category::getInfoBySeoAlias(end($arrayUrl));
-            if(!empty($tmp)) {
+            if(!empty($tmp)&&$tmp->pages->seo_alias_full==$urlFull) {
                 $result['type'] = 'category';
                 $result['info'] = $tmp;
                 return $result;
             }
             /* Check Blog */
             $tmp        = Blog::getInfoBySeoAlias(end($arrayUrl));
-            if(!empty($tmp)) {
+            if(!empty($tmp)&&$tmp->pages->seo_alias_full==$urlFull) {
                 $result['type'] = 'blog';
                 $result['info'] = $tmp;
                 return $result;
