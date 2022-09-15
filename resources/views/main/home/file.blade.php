@@ -30,7 +30,7 @@
                     @foreach($dataBlog as $blog)
                         <tr>
                             <td class="textCenter">{{ $loop->index+1 }}</td>
-                            <td><a href="{{ url('/'.$blog->pages->seo_alias) }}">{{ $blog->name }}</a></td>
+                            <td><a href="{{ url('/'.$blog->pages->seo_alias_full) }}">{{ $blog->name }}</a></td>
                             <td>
                                 @if(!empty($blog->category))
                                     @foreach($blog->category as $c)
@@ -44,7 +44,7 @@
                             </td>
                             <td class="textCenter" style="padding: 0 0.5rem;">
                                 <div class="iconAction">
-                                    <a href="{{ url('/'.$blog->pages->seo_alias) }}" class="iconAction_item">
+                                    <a href="{{ url('/'.$blog->pages->seo_alias_full) }}" class="iconAction_item">
                                         <i class="fa-solid fa-eye" style="margin-bottom: -0.5rem;"></i>
                                         <div>Xem</div>
                                     </a>
