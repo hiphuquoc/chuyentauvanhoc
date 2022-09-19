@@ -9,12 +9,12 @@
                 @foreach($outstanding as $item)
                     <div class="blogBoxSidebar_item">
                         <div class="blogBoxSidebar_item_image">
-                            <a href="{{ url($item->pages->seo_alias) }}">
+                            <a href="{{ url($item->pages->seo_alias_full) }}">
                                 <img src="/images/image-default-750x460.png" data-src="{{ $item->pages->image_small }}" alt="{{ $item->pages->title }}" title="{{ $item->pages->title }}" />
                             </a>
                         </div>
                         <div class="blogBoxSidebar_item_content">
-                            <a href="{{ url($item->pages->seo_alias) }}" class="blogBoxSidebar_item_content__title">
+                            <a href="{{ url($item->pages->seo_alias_full) }}" class="blogBoxSidebar_item_content__title">
                                 <h3 class="maxLine_2">
                                     {{ $item->pages->title }}
                                 </h3>
