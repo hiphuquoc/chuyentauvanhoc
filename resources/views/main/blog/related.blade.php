@@ -8,12 +8,12 @@
                 @foreach($special as $item)
                     <div class="relatedBox_box_item background">
                         <div class="relatedBox_box_item_image">
-                            <a href="{{ !empty($item->seo_alias) ? url($item->seo_alias) : null }}">
+                            <a href="{{ !empty($item->seo_alias_full) ? url($item->seo_alias_full) : null }}">
                                 <img src="/images/image-default-750x460.png" data-src="{{ $item->image_small ?? $item->image }}" alt="{{ $item->title }}" title="{{ $item->title }}">
                             </a>
                         </div>
                         <div class="relatedBox_box_item_content">
-                            <a href="{{ !empty($item->seo_alias) ? url($item->seo_alias) : null }}" class="relatedBox_box_item_content_title">
+                            <a href="{{ !empty($item->seo_alias_full) ? url($item->seo_alias_full) : null }}" class="relatedBox_box_item_content_title">
                                 <h3 class="maxLine_2">
                                     {{ $item->title ?? null }}
                                 </h3>
@@ -29,12 +29,12 @@
                 @foreach($related as $item)
                     <div class="relatedBox_box_item background">
                         <div class="relatedBox_box_item_image">
-                            <a href="{{ !empty($item->pages->seo_alias) ? url($item->pages->seo_alias) : url($item->seo_alias) }}">
+                            <a href="{{ !empty($item->pages->seo_alias_full) ? url($item->pages->seo_alias_full) : url($item->seo_alias_full) }}">
                                 <img src="/images/image-default-750x460.png" data-src="{{ $item->pages->image_small ?? $item->pages->image }}" alt="{{ $item->name }}" title="{{ $item->name }}">
                             </a>
                         </div>
                         <div class="relatedBox_box_item_content">
-                            <a href="{{ !empty($item->pages->seo_alias) ? url($item->pages->seo_alias) : url($item->seo_alias) }}" class="relatedBox_box_item_content_title">
+                            <a href="{{ !empty($item->pages->seo_alias_full) ? url($item->pages->seo_alias_full) : url($item->seo_alias_full) }}" class="relatedBox_box_item_content_title">
                                 <h3 class="maxLine_2">
                                     {{ $item->pages->title ?? $item->name ?? null }}
                                 </h3>
