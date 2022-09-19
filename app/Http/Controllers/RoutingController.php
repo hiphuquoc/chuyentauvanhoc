@@ -49,7 +49,7 @@ class RoutingController extends Controller {
                     /* Lấy danh sách category phân cấp theo tree */
                     $category           = Category::getAllCategoryByTree();
                     $xhtml              = view('main.blog.list', compact('breadcrumb', 'list', 'info', 'category', 'outstanding', 'searchName'))->render();
-                    if($result['info']->seo_alias!='tim-kiem') Storage::put(config('admin.cache.folderSave').$nameCache, $xhtml);
+                    if($result['info']->pages->seo_alias!='tim-kiem') Storage::put(config('admin.cache.folderSave').$nameCache, $xhtml);
                 }
                 echo $xhtml;
             }else if($result['type']==='blog'){ // ====== BLOG =============================

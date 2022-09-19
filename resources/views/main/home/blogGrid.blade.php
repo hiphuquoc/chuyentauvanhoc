@@ -20,13 +20,13 @@
                 @foreach($dataBlog->sortBy('pages.ordering')->sortByDesc('pages.created_at') as $blog)
                     <div class="blogBox_main_item">
                         <div class="blogBox_main_item_image">
-                            <a href="/{{ $blog->pages->seo_alias }}">
+                            <a href="/{{ $blog->pages->seo_alias_full }}">
                                 <img src="/images/image-default-750x460.png" data-src="{{ $blog->pages->image_small }}" alt="{{ $blog->name }}" title="{{ $blog->name }}" />
                             </a>
                         </div>
                         <div class="blogBox_main_item_content">
                             <div class="blogBox_main_item_content_title">
-                                <a href="/{{ $blog->pages->seo_alias }}">
+                                <a href="/{{ $blog->pages->seo_alias_full }}">
                                     <h3 class="maxLine_2">{{ $blog->pages->title }}</h3>
                                 </a>
                             </div>

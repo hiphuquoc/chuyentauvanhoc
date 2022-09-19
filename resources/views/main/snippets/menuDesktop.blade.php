@@ -38,7 +38,7 @@
             </div>
             <form id="formSearchDesktop" method="get" action="/tim-kiem">
                 <div class="searchHeader">
-                    <input type="text" name="search_name" placeholder="Tìm kiếm..." />
+                    <input type="text" name="search_name" placeholder="Tìm kiếm..." value="{{ $searchName ?? null }}" />
                     <i class="fa-solid fa-magnifying-glass noBackground" onClick="submitForm('formSearchDesktop');"></i>
                 </div>
             </form>
