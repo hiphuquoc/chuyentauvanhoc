@@ -58,7 +58,7 @@
     </td>
     <td style="vertical-align:top;display:flex;">
         <div class="icon-wrapper iconAction">
-            <a href="{{ url($item->pages->seo_alias) ?? null }}" target="_blank">
+            <a href="{{ url($item->pages->seo_alias_full) ?? null }}" target="_blank">
                 <i data-feather='eye'></i>
                 <div>Xem</div>
             </a>
