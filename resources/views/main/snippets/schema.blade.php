@@ -81,7 +81,7 @@
                     {
                         "@type": "ListItem",
                         "position": {{ $loop->index + 1 }},
-                        "name": "{{ $info->seo_title }}",
+                        "name": "{{ $item->seo_title }}",
                         "item": "{{ env('APP_URL') }}/{{ $item->seo_alias }}"
                     }
                 @endforeach
