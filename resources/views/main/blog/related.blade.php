@@ -57,8 +57,8 @@
                     $('.relatedBox_box').slick({
                         infinite: false,
                         slidesToShow: 2.7,
-                        slidesToScroll: 1,
-                        arrows: false,
+                        slidesToScroll: 3,
+                        arrows: true,
                         responsive: [
                             {
                                 breakpoint: 767,
