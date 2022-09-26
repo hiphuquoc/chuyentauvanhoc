@@ -8,10 +8,10 @@
         {{ $no }}
     </td>
     <td style="vertical-align:top;">
-        {{ $item->url_old }}
+        <a href="{{ $item->url_old }}" target="_blank">{{ $item->url_old }}</a>
     </td>
     <td style="vertical-align:top;">
-        {{ $item->url_new }}
+        <a href="{{ $item->url_new }}" target="_blank">{{ $item->url_new }}</a>
     </td>
     <td style="vertical-align:top;display:flex;">
         <div class="icon-wrapper iconAction">
