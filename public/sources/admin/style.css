@@ -204,10 +204,11 @@ label.error {
 
 .actionDelete {
   cursor: pointer;
-  color: #adb5bd;
+  color: #E74C3C !important;
+  opacity: 0.9;
 }
 .actionDelete:hover {
-  color: #E74C3C;
+  opacity: 1;
 }
 
 .pageAdminWithRightSidebar_header {

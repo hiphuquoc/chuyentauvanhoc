@@ -186,6 +186,11 @@ return [
             'name'      => 'Xóa cache',
             'route'     => 'admin.cache.clearCacheAllPage',
             'icon'      => '<i class="fa-solid fa-ban"></i>'
+        ],
+        [
+            'name'      => 'Redirect 301',
+            'route'     => 'admin.redirect.list',
+            'icon'      => '<i data-feather=\'refresh-cw\'></i>'
         ]
     ]
 ];

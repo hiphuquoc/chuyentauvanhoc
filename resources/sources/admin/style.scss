@@ -267,9 +267,10 @@ label.error {
 
 .actionDelete {
     cursor: pointer;
-    color: $bg-06;
+    color: $color-red !important;
+    opacity: 0.9;
     &:hover {
-        color: $color-red;
+        opacity: 1;
     }
 }
 

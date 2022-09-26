@@ -31,7 +31,6 @@ class BlogAdminController extends Controller {
         if(!empty($request->get('search_category'))) $params['search_category'] = $request->get('search_category');
         $list               = Blog::getListAdmin($params);
         $categories         = Category::all();
-
         // dd($list->toArray());
         return view('admin.blog.list', compact('list', 'categories', 'params'));
     }
