@@ -26,11 +26,11 @@ use App\Http\Controllers\Admin\Auth\LoginController;
 |
 */
 
-foreach(\App\Models\Redirect::all() as $redirect){
-    Route::get($redirect->url_old, function() use($redirect){ 
-        return Redirect::to($redirect->url_new, 301); 
-    });
-}
+// foreach(\App\Models\Redirect::all() as $redirect){
+//     Route::get($redirect->url_old, function() use($redirect){ 
+//         return Redirect::to($redirect->url_new, 301); 
+//     });
+// }
 
 // Route::get('/thu-trung-thu-bac-viet-cho-thieu-nhi', function(){ 
 //     return Redirect::to('/nghi-luan-van-hoc/nang-cao/thu-trung-thu-bac-viet-cho-thieu-nhi', 301); 
