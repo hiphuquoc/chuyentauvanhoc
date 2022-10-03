@@ -852,7 +852,7 @@ a.more-link > i {
   border-radius: 5px;
   -o-object-fit: cover;
      object-fit: cover;
-  height: auto;
+  height: 170px;
 }
 .articleBox_item_content {
   width: 100%;
@@ -935,6 +935,9 @@ a.more-link > i {
   .articleBox_item_image {
     flex: 0 0 100%;
     height: unset;
+  }
+  .articleBox_item_image img {
+    height: 215px !important;
   }
   .articleBox_item_content {
     padding: 0.5rem 0;
