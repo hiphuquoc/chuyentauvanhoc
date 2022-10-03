@@ -21,7 +21,7 @@ class Upload {
             // save image resize (Small)
             ImageManagerStatic::make($image->getRealPath())
                 ->encode($extension, config('admin.images.quality'))
-                ->resize(config('admin.images.smallResize_width'), config('admin.images.smallResize_height'))
+                // ->resize(config('admin.images.smallResize_width'), config('admin.images.smallResize_height'))
                 ->save(Storage::path($filenameSmall));
             $result['filePathSmall']    = Storage::url($filenameSmall);
             // ===== set filename & checkexists (Normal)
@@ -29,7 +29,7 @@ class Upload {
             // save image resize (Normal)
             ImageManagerStatic::make($image->getRealPath())
                 ->encode($extension, config('admin.images.quality'))
-                ->resize(config('admin.images.normalResize_width'), config('admin.images.normalResize_height'))
+                // ->resize(config('admin.images.normalResize_width'), config('admin.images.normalResize_height'))
                 ->save(Storage::path($filenameNormal));
             $result['filePathNormal']    = Storage::url($filenameNormal);
         }
