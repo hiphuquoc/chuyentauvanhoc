@@ -794,6 +794,10 @@ a.more-link > i {
 }
 .relatedBox_box_item_image img {
   border-radius: 5px;
+  height: 170px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  width: 100%;
 }
 .relatedBox_box_item_content {
   padding: 0.5rem 0;
