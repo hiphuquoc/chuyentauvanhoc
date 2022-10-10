@@ -60,23 +60,27 @@ p {
 }
 
 h2 {
+  font-size: 1.35rem;
+  margin-bottom: 0.75rem;
+}
+
+h3 {
   font-size: 1.25rem;
   margin-bottom: 0.5rem;
 }
 
-h3 {
-  font-size: 1.2rem;
-  margin-bottom: 0.4rem;
-}
-
 h4 {
-  font-size: 1.1rem;
-  margin-bottom: 0.35rem;
+  font-size: 1.15rem;
+  margin-bottom: 0.5rem;
 }
 
 h5 {
-  font-size: 1rem;
-  margin-bottom: 0.35rem;
+  font-size: 1.05rem;
+  margin-bottom: 0.5rem;
+}
+
+h2, h3, h4, h5, h6 {
+  font-family: "SVN-Gilroy Bold", "Verdana", "Roboto", "Tahoma", sans-serif;
 }
 
 a {
@@ -2542,6 +2546,41 @@ footer {
 @media (max-width: 767px) {
   .firstLine {
     padding: 0 0.75rem;
+  }
+}
+
+.moreContent {
+  margin-bottom: 3rem;
+  background: #fff;
+  padding: 1rem 1rem 0 1rem;
+  border-radius: 7px;
+  box-shadow: 0 0 5px #e9ecef;
+}
+.moreContent_content {
+  overflow: hidden;
+  height: 400px;
+  text-align: justify;
+}
+.moreContent_button {
+  font-weight: 500;
+  font-family: "SVN-Gilroy Bold", "Verdana", "Roboto", "Tahoma", sans-serif;
+  padding: 0.75rem 0;
+  color: rgb(13, 105, 196);
+  cursor: pointer;
+}
+.moreContent_button i {
+  margin-left: 0.5rem;
+  vertical-align: middle;
+}
+@media (max-width: 1023px) {
+  .moreContent {
+    margin-bottom: 2.5rem;
+  }
+}
+@media (max-width: 577px) {
+  .moreContent {
+    padding: 0;
+    margin-bottom: 2rem;
   }
 }
 

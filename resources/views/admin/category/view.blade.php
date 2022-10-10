@@ -56,6 +56,18 @@
                             </div>
                         </div>
                     </div>
+                    <div class="pageAdminWithRightSidebar_main_content_item fullWidth">
+                        <div class="card">
+                            <div class="card-header border-bottom">
+                                <h4 class="card-title">Nội dung</h4>
+                            </div>
+                            <div class="card-body pt-2">
+    
+                                @include('admin.form.formContent')
+                                
+                            </div>
+                        </div>
+                    </div>
                     <!-- END:: Main content -->
                 </div>
                 <div class="pageAdminWithRightSidebar_main_rightSidebar">

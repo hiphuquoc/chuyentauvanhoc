@@ -62,14 +62,37 @@
             <div class="pageContent_sidebar">
                 @include('main.blog.sidebar', compact('category', 'outstanding'))
             </div>
+            
         </div>
+        
+        @if(!empty($info->content))
+            <div class="moreContent">
+                <div id="js_viewMoreContent_element" class="moreContent_content">
+                    <div>
+                        {!! $info->content !!}
+                    </div>
+                </div>
+                <div class="moreContent_button" onClick="viewMoreContent(this, 'js_viewMoreContent_element', 400);">
+                    Xem thêm<i class="fa-solid fa-arrow-right-long"></i>
+                </div>
+            </div>
+        @endif
     </div>
 
 @endsection
 @push('scripts-custom')
     <script type="text/javascript">
-
-
+        function viewMoreContent(btn, idContent, maxHeight){
+            const heightNow     = $('#'+idContent).outerHeight();
+            const heightFull    = $('#'+idContent+' div').outerHeight();
+            if(Math.floor(heightNow)<Math.floor(heightFull)){
+                $('#'+idContent).css('height', heightFull);
+                $(btn).html('Thu gọn<i class="fa-solid fa-arrow-left-long"></i>');
+            }else {
+                $('#'+idContent).css('height', maxHeight);
+                $(btn).html('Xem thêm<i class="fa-solid fa-arrow-right-long"></i>');
+            }
+        }
     </script>
     <!-- Facebook Script -->
     <script src="https://connect.facebook.net/vi_VN/sdk.js?hash=1589878c8f70a5f02472da6fb4fe2085" async="" crossorigin="anonymous"></script><script async="" defer="" crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&amp;version=v14.0&amp;appId=412989459053103&amp;autoLogAppEvents=1" nonce="X8ejeuha"></script>

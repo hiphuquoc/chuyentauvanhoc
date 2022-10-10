@@ -63,12 +63,14 @@ class BuildModelService {
             + name
             + description
             + page_id
+            + content
         */
         $result                             = [];
         if(!empty($dataForm)){
             $result['name']                 = $dataForm['title'] ?? null;
             $result['description']          = $dataForm['description'] ?? null;
             if(!empty($pageId)) $result['page_id'] = $pageId;
+            $result['content']              = $dataForm['content'] ?? null;
         }
         return $result;
     }

@@ -23,14 +23,14 @@ class RoutingController extends Controller {
         $result         = $this->UrlService->checkUrlExists($arraySlug);
         if(!empty($result)){
             if($result['type']=='category'){   // ====== CATEGORY =============================
-                /* cache */
-                $cacheOfPage            = request("page") ?? 0;
-                $nameCache              = self::buildNameCacheBySeoAlias($result['info']->pages->seo_alias_full).'-page-'.$cacheOfPage.'.'.config('admin.cache.extension');
-                $pathCache              = Storage::path(config('admin.cache.folderSave')).$nameCache;
-                $cacheTime    	        = 1800;
-                if(file_exists($pathCache)&&$cacheTime>(time() - filectime($pathCache))){
-                    $xhtml = file_get_contents($pathCache);
-                }else {
+                // /* cache */
+                // $cacheOfPage            = request("page") ?? 0;
+                // $nameCache              = self::buildNameCacheBySeoAlias($result['info']->pages->seo_alias_full).'-page-'.$cacheOfPage.'.'.config('admin.cache.extension');
+                // $pathCache              = Storage::path(config('admin.cache.folderSave')).$nameCache;
+                // $cacheTime    	        = 1800;
+                // if(file_exists($pathCache)&&$cacheTime>(time() - filectime($pathCache))){
+                //     $xhtml = file_get_contents($pathCache);
+                // }else {
                     $params             = [];
                     $params['paginate'] = 10;
                     $searchName         = request('search_name') ?? null;
@@ -49,8 +49,8 @@ class RoutingController extends Controller {
                     /* Lấy danh sách category phân cấp theo tree */
                     $category           = Category::getAllCategoryByTree();
                     $xhtml              = view('main.blog.list', compact('breadcrumb', 'list', 'info', 'category', 'outstanding', 'searchName'))->render();
-                    if($result['info']->pages->seo_alias!='tim-kiem') Storage::put(config('admin.cache.folderSave').$nameCache, $xhtml);
-                }
+                //     if($result['info']->pages->seo_alias!='tim-kiem') Storage::put(config('admin.cache.folderSave').$nameCache, $xhtml);
+                // }
                 echo $xhtml;
             }else if($result['type']==='blog'){ // ====== BLOG =============================
                 /* cache */

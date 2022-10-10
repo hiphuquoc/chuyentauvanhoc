@@ -1856,6 +1856,36 @@ footer {
         padding: 0 0.75rem;
     }
 }
+.moreContent {
+    margin-bottom: 3rem;
+    background: #fff;
+    padding: 1rem 1rem 0 1rem;
+    border-radius: 7px;
+    box-shadow: 0 0 5px $bg-03;
+    &_content {
+        overflow: hidden;
+        height: 400px;
+        text-align: justify;
+    }
+    &_button {
+        font-weight: 500;
+        font-family: $font-primary-title-bold;
+        padding: 0.75rem 0;
+        color: $color-primary;
+        cursor: pointer;
+        i {
+            margin-left: 0.5rem;
+            vertical-align: middle;
+        }
+    }
+    @media (max-width: 1023px){
+        margin-bottom: 2.5rem;
+    }
+    @media (max-width: 577px){
+        padding: 0;
+        margin-bottom: 2rem;
+    }
+}
 /* END:: Blog ======================================== */
 .gotoTop {
     position: fixed;

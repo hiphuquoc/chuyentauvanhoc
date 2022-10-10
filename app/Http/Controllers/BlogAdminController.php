@@ -127,8 +127,8 @@ class BlogAdminController extends Controller {
             if(!empty($request->get('relation_blog'))){
                 foreach($request->get('relation_blog') as $relation){
                     $insertRelationBlog = [
-                        'blog_info_id'     => $idBlog,
-                        'blog_relation_id'     => $relation,
+                        'blog_info_id'          => $idBlog,
+                        'blog_relation_id'      => $relation,
                     ];
                     RelationBlog::insertItem($insertRelationBlog);
                 }
