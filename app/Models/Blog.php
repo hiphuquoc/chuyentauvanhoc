@@ -92,13 +92,14 @@ class Blog extends Model {
     public static function getListBySeoAliasCategory($seoAlias, $params = null){
         $result             = null;
         if(!empty($seoAlias)){
+            $paginate       = $params['paginate'] ?? 50;
             $result     = Blog::select('*')
                             ->whereHas('category.infoCategory.pages', function($query) use($seoAlias){
                                 $query->where('seo_alias', $seoAlias);
                             })
                             ->with('pages')
                             ->orderBy('id', 'DESC')
-                            ->get();
+                            ->paginate($paginate);
         }
         return $result;
     }

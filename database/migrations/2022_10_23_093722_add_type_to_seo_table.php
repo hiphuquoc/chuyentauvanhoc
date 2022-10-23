@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddContentToCategoriesInfoTable extends Migration
+class AddTypeToSeoTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddContentToCategoriesInfoTable extends Migration
      */
     public function up()
     {
-        Schema::table('categories_info', function (Blueprint $table) {
-            $table->longText('content')->nullable();
+        Schema::table('seo', function (Blueprint $table) {
+            $table->string('type', 50);
         });
     }
 
@@ -25,8 +25,8 @@ class AddContentToCategoriesInfoTable extends Migration
      */
     public function down()
     {
-        Schema::table('categories_info', function (Blueprint $table) {
-            // $table->dropColumn('content');
+        Schema::table('seo', function (Blueprint $table) {
+            //
         });
     }
 }

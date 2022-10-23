@@ -73,7 +73,7 @@ class BlogAdminController extends Controller {
                 $dataPath       = Upload::uploadThumnail($request->file('image'), $name);
             }
             /* insert seo */
-            $insertPage         = $this->BuildModelService->buildArrayInsertUpdateTablePages($request->all(), $dataPath);
+            $insertPage         = $this->BuildModelService->buildArrayInsertUpdateTablePages($request->all(), 'blogs_info', $dataPath);
             $pageId             = Seo::insertItem($insertPage);
 
             /* insert blog_info */
@@ -113,7 +113,7 @@ class BlogAdminController extends Controller {
                 $dataPath       = Upload::uploadThumnail($request->file('image'), $name);
             }
             /* update seo */
-            $updatePage         = $this->BuildModelService->buildArrayInsertUpdateTablePages($request->all(), $dataPath);
+            $updatePage         = $this->BuildModelService->buildArrayInsertUpdateTablePages($request->all(), 'blogs_info', $dataPath);
             Seo::updateItem($request->get('seo_id'), $updatePage);
 
             /* update blog_info */

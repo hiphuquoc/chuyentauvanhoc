@@ -48,7 +48,7 @@ class CategoryAdminController extends Controller {
                 $dataPath       = Upload::uploadThumnail($request->file('image'), $name);
             }
             /* insert page */
-            $insertPage         = $this->BuildModelService->buildArrayInsertUpdateTablePages($request->all(), $dataPath);
+            $insertPage         = $this->BuildModelService->buildArrayInsertUpdateTablePages($request->all(), 'categories_info', $dataPath);
             $pageId             = Seo::insertItem($insertPage);
             /* insert categories_info */
             $insertCategory     = $this->BuildModelService->buildArrayInsertUpdateTableCategoriesInfo($request->all(), $pageId);
@@ -82,7 +82,7 @@ class CategoryAdminController extends Controller {
                 $dataPath       = Upload::uploadThumnail($request->file('image'), $name);
             }
             /* update page */
-            $updatePage         = $this->BuildModelService->buildArrayInsertUpdateTablePages($request->all(), $dataPath);
+            $updatePage         = $this->BuildModelService->buildArrayInsertUpdateTablePages($request->all(), 'categories_info', $dataPath);
             $flagUpdatePage     = Seo::updateItem($request->get('seo_id'), $updatePage);
             /* update category */
             $updateCategory     = $this->BuildModelService->buildArrayInsertUpdateTableCategoriesInfo($request->all());

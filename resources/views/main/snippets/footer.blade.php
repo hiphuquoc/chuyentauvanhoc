@@ -1,7 +1,7 @@
 <!-- === START:: Footer === -->
 @php
     $params     = [
-        'limit' => 5
+        'paginate' => 5
     ];
     $blogNLXH   = \App\Models\Blog::getListBySeoAliasCategory('nghi-luan-xa-hoi', $params);
 @endphp

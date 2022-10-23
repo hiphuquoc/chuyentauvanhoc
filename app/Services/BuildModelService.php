@@ -6,7 +6,7 @@ use App\Models\Category;
 use App\Models\Seo;
 
 class BuildModelService {
-    public static function buildArrayInsertUpdateTablePages($dataForm, $dataPath = null){
+    public static function buildArrayInsertUpdateTablePages($dataForm, $type, $dataPath = null){
         /* update page_info
             + title
             + description
@@ -30,6 +30,8 @@ class BuildModelService {
             $result['description']              = $dataForm['description'] ?? null;
             if(!empty($dataPath['filePathNormal'])) $result['image']           = $dataPath['filePathNormal'];
             if(!empty($dataPath['filePathSmall']))  $result['image_small']     = $dataPath['filePathSmall'];
+            /*  type */
+            $result['type']                     = $type ?? null;
             /* page level */
             $pageLevel                          = 1;
             $pageParent                         = 0;

@@ -8,6 +8,7 @@ use App\Models\Blog;
 use App\Services\UrlService;
 
 use App\Helpers\Url;
+use App\Models\Redirect;
 
 class RoutingController extends Controller {
     public function __construct(UrlService $UrlService){
@@ -22,71 +23,81 @@ class RoutingController extends Controller {
         // check url có tồn tại?
         $result         = $this->UrlService->checkUrlExists($arraySlug);
         if(!empty($result)){
-            if($result['type']=='category'){   // ====== CATEGORY =============================
-                // /* cache */
-                // $cacheOfPage            = request("page") ?? 0;
-                // $nameCache              = self::buildNameCacheBySeoAlias($result['info']->pages->seo_alias_full).'-page-'.$cacheOfPage.'.'.config('admin.cache.extension');
-                // $pathCache              = Storage::path(config('admin.cache.folderSave')).$nameCache;
-                // $cacheTime    	        = 1800;
-                // if(file_exists($pathCache)&&$cacheTime>(time() - filectime($pathCache))){
-                //     $xhtml = file_get_contents($pathCache);
-                // }else {
-                    $params             = [];
-                    $params['paginate'] = 10;
-                    $searchName         = request('search_name') ?? null;
-                    $params['search_name']  = $searchName;
-                    $idCate             = $result['info']->id;
-                    $info               = $result['info'] ?? [];
-                    $type               = $result['type'];
-                    /* lấy thông tin breadcrumd */
-                    $breadcrumb         = Url::buildArrayBreadcrumb($info);
-                    /* tạo mảng array category parent + child of child */
-                    $arrayCategoryId    = Category::getArrayCategoryChildById($info->id, $info->pages->id);
-                    /* Lấy danh sách blog */
-                    $list               = Blog::getListByArrayIdCategory($arrayCategoryId, $params);
-                    /* Lấy blog nổi bật */
-                    $outstanding        = Blog::getList(['outstanding' => 1]);
-                    /* Lấy danh sách category phân cấp theo tree */
-                    $category           = Category::getAllCategoryByTree();
-                    $xhtml              = view('main.blog.list', compact('breadcrumb', 'list', 'info', 'category', 'outstanding', 'searchName'))->render();
-                //     if($result['info']->pages->seo_alias!='tim-kiem') Storage::put(config('admin.cache.folderSave').$nameCache, $xhtml);
-                // }
-                echo $xhtml;
-            }else if($result['type']==='blog'){ // ====== BLOG =============================
-                /* cache */
-                $nameCache              = self::buildNameCacheBySeoAlias($result['info']->pages->seo_alias_full).'.'.config('admin.cache.extension');
-                $pathCache              = Storage::path(config('admin.cache.folderSave')).$nameCache;
-                $cacheTime    	        = 1800;
-                if(file_exists($pathCache)&&$cacheTime>(time() - filectime($pathCache))){
-                    $xhtml = file_get_contents($pathCache);
-                }else {
-                    $idBlog             = $result['info']->id;
-                    $info               = $result['info'] ?? [];
-                    $type               = $result['type'];
-                    /* lấy thông tin breadcrumd */
-                    $breadcrumb         = Url::buildArrayBreadcrumb($info);
-                    /* Lấy blog nổi bật */
-                    $outstanding        = Blog::getList(['outstanding' => 1]);
-                    /* Lấy danh sách category phân cấp theo tree */
-                    $category           = Category::getAllCategoryByTree();
-                    /* lấy bài viết liên quan đặc biệt */
-                    $special            = Blog::getListSpecialById($idBlog);
-                    /* lấy danh sách category của bài viết hiện tại */
-                    $listCategory       = Category::getListCategoryByBlogId($idBlog);
-                    $arrayCategoryId    = [];
-                    foreach($listCategory as $item) $arrayCategoryId[]  = $item->id;
-                    /* loại trừ blog hiện tại + blog special */
-                    $params['arrayIdNot'][] = $idBlog;
-                    foreach($special as $s) $params['arrayIdNot'][] = $s->id;
-                    /* lấy bài viết liên quan */
-                    $related            = Blog::getListByArrayIdCategory($arrayCategoryId, $params);
-                    $xhtml              = view('main.blog.detail', compact('breadcrumb', 'info', 'category', 'outstanding', 'special', 'related'))->render();
-                    Storage::put(config('admin.cache.folderSave').$nameCache, $xhtml);
+            /* kiểm tra xem truy cập có đúng hoàn toàn url không */
+            $url        = implode('/', $arraySlug);
+            if($url==$result->seo_alias_full) {
+                /* truy cập đúng => trả kết quả */
+                if($result->type=='categories_info'){   // ====== CATEGORY =============================
+                    /* cache */
+                    $cacheOfPage            = request("page") ?? 0;
+                    $nameCache              = self::buildNameCacheBySeoAlias($result->seo_alias_full).'-page-'.$cacheOfPage.'.'.config('admin.cache.extension');
+                    $pathCache              = Storage::path(config('admin.cache.folderSave')).$nameCache;
+                    $cacheTime    	        = 1800;
+                    if(file_exists($pathCache)&&$cacheTime>(time() - filectime($pathCache))){
+                        $xhtml = file_get_contents($pathCache);
+                    }else {
+                        $params             = [];
+                        $params['paginate'] = 10;
+                        $searchName         = request('search_name') ?? null;
+                        $params['search_name']  = $searchName;
+                        $info               = Category::select('*')
+                                                ->where('page_id', $result->id)
+                                                ->first();
+                        $idCate             = $info->id;
+                        /* lấy thông tin breadcrumd */
+                        $breadcrumb         = Url::buildArrayBreadcrumb($result);
+                        /* tạo mảng array category parent + child of child */
+                        $arrayCategoryId    = Category::getArrayCategoryChildById($info->id, $info->pages->id);
+                        /* Lấy danh sách blog */
+                        $list               = Blog::getListByArrayIdCategory($arrayCategoryId, $params);
+                        /* Lấy blog nổi bật */
+                        $outstanding        = Blog::getList(['outstanding' => 1]);
+                        /* Lấy danh sách category phân cấp theo tree */
+                        $category           = Category::getAllCategoryByTree();
+                        $xhtml              = view('main.blog.list', compact('breadcrumb', 'list', 'info', 'category', 'outstanding', 'searchName'))->render();
+                        if($result->seo_alias!='tim-kiem') Storage::put(config('admin.cache.folderSave').$nameCache, $xhtml);
+                    }
+                    echo $xhtml;
+                }else if($result->type=='blogs_info'){ // ====== BLOG =============================
+                    /* cache */
+                    $nameCache              = self::buildNameCacheBySeoAlias($result->seo_alias_full).'.'.config('admin.cache.extension');
+                    $pathCache              = Storage::path(config('admin.cache.folderSave')).$nameCache;
+                    $cacheTime    	        = 1800;
+                    if(file_exists($pathCache)&&$cacheTime>(time() - filectime($pathCache))){
+                        $xhtml = file_get_contents($pathCache);
+                    }else {
+                        $info               = Blog::select('*')
+                                                ->where('page_id', $result->id)
+                                                ->first();
+                        $idBlog             = $info->id;
+                        /* lấy thông tin breadcrumd */
+                        $breadcrumb         = Url::buildArrayBreadcrumb($result);
+                        /* Lấy blog nổi bật */
+                        $outstanding        = Blog::getList(['outstanding' => 1]);
+                        /* Lấy danh sách category phân cấp theo tree */
+                        $category           = Category::getAllCategoryByTree();
+                        /* lấy bài viết liên quan đặc biệt */
+                        $special            = Blog::getListSpecialById($idBlog);
+                        /* lấy danh sách category của bài viết hiện tại */
+                        $listCategory       = Category::getListCategoryByBlogId($idBlog);
+                        $arrayCategoryId    = [];
+                        foreach($listCategory as $item) $arrayCategoryId[]  = $item->id;
+                        /* loại trừ blog hiện tại + blog special */
+                        $params['arrayIdNot'][] = $idBlog;
+                        foreach($special as $s) $params['arrayIdNot'][] = $s->id;
+                        /* lấy bài viết liên quan */
+                        $related            = Blog::getListByArrayIdCategory($arrayCategoryId, $params);
+                        $xhtml              = view('main.blog.detail', compact('breadcrumb', 'info', 'category', 'outstanding', 'special', 'related'))->render();
+                        Storage::put(config('admin.cache.folderSave').$nameCache, $xhtml);
+                    }
+                    echo $xhtml;
                 }
-                echo $xhtml;
+            }else {
+                /* truy cập sai parent => redirect về cho đúng */
+                return redirect()->to('/'.$result->seo_alias_full);
             }
         }else {
-            /* Error 404 */
+            /* 404 */
             /* cache */
             $nameCache              = '404.'.config('admin.cache.extension');
             $pathCache              = Storage::path(config('admin.cache.folderSave')).$nameCache;

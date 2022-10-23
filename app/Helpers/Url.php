@@ -10,11 +10,11 @@ class Url {
     public static function buildArrayBreadcrumb($data){
         $result         = [];
         if(!empty($data)){
-            $result[]   = $data->pages;
+            $result[]   = $data;
             $infoSeo    = Seo::select('*')
                             ->get();
-            $parent                 = $data->pages->parent;
-            for($i=1;$i<$data->pages->level;++$i){
+            $parent                 = $data->parent;
+            for($i=1;$i<$data->level;++$i){
                 foreach($infoSeo as $page){
                     if($page->id==$parent) {
                         $parent     = $page->parent;
@@ -24,10 +24,14 @@ class Url {
                 }
             }
             /* sắp xếp theo level */
-            $level = array_column($result, 'level');
-            array_multisort($level, SORT_ASC, $result);
+            $price = array();
+            foreach ($result as $key => $row){
+                $price[$key] = $row->level;
+            }
+            array_multisort($price, SORT_ASC, $result);
         }
         return $result;
+
     }
 
     public static function buildParentChild($item, $arrayData){
