@@ -15,7 +15,7 @@ class CreateCategoriesInfoTable extends Migration
     {
         Schema::create('categories_info', function (Blueprint $table) {
             $table->id();
-            $table->integer('page_id');                 // [ref: > pages.id]
+            $table->integer('page_id');
             $table->text('name');
             $table->text('description')->nullable();
         });
