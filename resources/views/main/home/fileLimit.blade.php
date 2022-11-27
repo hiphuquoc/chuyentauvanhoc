@@ -1,4 +1,11 @@
-@if(!empty($list)&&$list->isNotEmpty())
+@php
+    $list   = \App\Models\Blog::select('*')
+                ->where('download', 1)
+                ->orderBy('id', 'DESC')
+                ->skip(0)->take(10)
+                ->get();
+@endphp
+
 <div class="container">
 
     <div class="fileDownloadBox">
@@ -51,7 +58,9 @@
                     @endforeach
                 </tbody>
             </table>
-    
+        </div>
+        <div class="viewMore">
+            <a href="/tai-tai-lieu" title="Xem tất cả"><i class="fa-solid fa-arrow-down-long"></i>Xem tất cả</a>
         </div>
         {{-- <div class="fileDownloadBox_button">
             <a href="#">
@@ -61,4 +70,3 @@
     
     </div>
 </div>
-@endif

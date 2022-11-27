@@ -25,7 +25,7 @@
         <!-- === END:: BLOG === -->
 
         <!-- === START:: BLOG === -->
-        @include('main.home.file')
+        @include('main.home.fileLimit')
         <!-- === END:: BLOG === -->
 
         <!-- === START:: BLOG === -->
