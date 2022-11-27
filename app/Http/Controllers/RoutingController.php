@@ -51,7 +51,11 @@ class RoutingController extends Controller {
                         /* Lấy danh sách blog */
                         $list               = Blog::getListByArrayIdCategory($arrayCategoryId, $params);
                         /* Lấy blog nổi bật */
-                        $outstanding        = Blog::getList(['outstanding' => 1]);
+                        $outstanding        = Blog::select('*')
+                                                ->where('outstanding', 1)
+                                                ->orderBy('id', 'DESC')
+                                                ->skip(0)->take(7)
+                                                ->get();
                         /* Lấy danh sách category phân cấp theo tree */
                         $category           = Category::getAllCategoryByTree();
                         $xhtml              = view('main.blog.list', compact('breadcrumb', 'list', 'info', 'category', 'outstanding', 'searchName'))->render();
@@ -73,7 +77,11 @@ class RoutingController extends Controller {
                         /* lấy thông tin breadcrumd */
                         $breadcrumb         = Url::buildArrayBreadcrumb($result);
                         /* Lấy blog nổi bật */
-                        $outstanding        = Blog::getList(['outstanding' => 1]);
+                        $outstanding        = Blog::select('*')
+                                                ->where('outstanding', 1)
+                                                ->orderBy('id', 'DESC')
+                                                ->skip(0)->take(7)
+                                                ->get();
                         /* Lấy danh sách category phân cấp theo tree */
                         $category           = Category::getAllCategoryByTree();
                         /* lấy bài viết liên quan đặc biệt */
