@@ -1,7 +1,7 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/rhawgejx/chuyentauvanhoc.edu.vn/
+    - export DEPLOYPATH=/home/eqeqmgjz/public_html/chuyentauvanhoc.edu.vn/
     - /bin/cp -R * $DEPLOYPATH
     # - /bin/cp app $DEPLOYPATH
     # - /bin/cp bootstrap $DEPLOYPATH
