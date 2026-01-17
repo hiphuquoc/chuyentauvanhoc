@@ -20,6 +20,14 @@ class RoutingController extends Controller {
         // loại bỏ phần tử rỗng
         $arraySlug      = [];
         foreach($tmpSlug as $slug) if(!empty($slug)) $arraySlug[] = $slug;
+        // handle redirects without querying in routes/web.php
+        $fullPath       = implode('/', $arraySlug);
+        $redirect       = Redirect::where('url_old', $fullPath)
+                            ->orWhere('url_old', '/'.$fullPath)
+                            ->first();
+        if(!empty($redirect)) {
+            return redirect()->to($redirect->url_new, 301);
+        }
         // check url có tồn tại?
         $result         = $this->UrlService->checkUrlExists($arraySlug);
         if(!empty($result)){

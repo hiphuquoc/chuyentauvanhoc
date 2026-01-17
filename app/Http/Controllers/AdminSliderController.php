@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\SystemFile;
 use Illuminate\Http\Request;
-use Intervention\Image\ImageManagerStatic;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
 use Illuminate\Support\Facades\Storage;
 
 class AdminSliderController extends Controller {
@@ -161,6 +162,7 @@ class AdminSliderController extends Controller {
     public static function uploadImage($requestImage, $filePathUpload, $action = 'rewrite', $addType = null){
         $fileSaved          = null;
         if(!empty($requestImage)){
+            $manager        = new ImageManager(new Driver());
             /* thêm type cho filePath */
             $imageFileName  = pathinfo($filePathUpload)['filename'];
             $extension      = config('admin.images.extension');
@@ -174,7 +176,7 @@ class AdminSliderController extends Controller {
                 }
             }
             /* thêm ảnh */ 
-            ImageManagerStatic::make($requestImage->getRealPath())
+            $manager->read($requestImage->getRealPath())
                 ->save($filePathUpload);
             $fileSaved      = $filePathUpload;
         }

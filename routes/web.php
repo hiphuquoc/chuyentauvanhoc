@@ -82,12 +82,6 @@ Route::prefix('admin')->group(function(){
     });
 });
 
-foreach(\App\Models\Redirect::all() as $redirect){
-    Route::get($redirect->url_old, function() use($redirect){ 
-        return Redirect::to($redirect->url_new, 301); 
-    });
-}
-
 Route::get('/', [HomeController::class, 'home'])->name('home.index');
 Route::get('/tai-tai-lieu', [HomeController::class, 'downloads'])->name('home.downloads');
 Route::get('/buildTocContent', [BlogController::class, 'buildTocContent'])->name('main.blog.buildTocContent');
