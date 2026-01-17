@@ -60,23 +60,35 @@
               {{ __('Please confirm access to your account by entering one of your emergency recovery codes.') }}
             </div>
 
-            <x-jet-validation-errors class="mb-1" />
+            @if ($errors->any())
+              <div class="alert alert-danger mb-1">
+                <ul class="mb-0">
+                  @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                  @endforeach
+                </ul>
+              </div>
+            @endif
 
             <form method="POST" action="{{ route('two-factor.login') }}">
               @csrf
 
               <div class="mb-1" x-show="! recovery">
-                <x-jet-label class="form-label" value="{{ __('Code') }}" />
-                <x-jet-input class="{{ $errors->has('code') ? 'is-invalid' : '' }}" type="text" inputmode="numeric"
-                  name="code" autofocus x-ref="code" autocomplete="one-time-code" />
-                <x-jet-input-error for="code"></x-jet-input-error>
+                <label class="form-label">{{ __('Code') }}</label>
+                <input class="form-control {{ $errors->has('code') ? 'is-invalid' : '' }}" type="text"
+                  inputmode="numeric" name="code" autofocus x-ref="code" autocomplete="one-time-code" />
+                @error('code')
+                  <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
               </div>
 
               <div class="mb-1" x-show="recovery">
-                <x-jet-label class="form-label" value="{{ __('Recovery Code') }}" />
-                <x-jet-input class="{{ $errors->has('recovery_code') ? 'is-invalid' : '' }}" type="text"
+                <label class="form-label">{{ __('Recovery Code') }}</label>
+                <input class="form-control {{ $errors->has('recovery_code') ? 'is-invalid' : '' }}" type="text"
                   name="recovery_code" x-ref="recovery_code" autocomplete="one-time-code" />
-                <x-jet-input-error for="recovery_code"></x-jet-input-error>
+                @error('recovery_code')
+                  <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
               </div>
 
               <div class="d-flex justify-content-end mt-2">
@@ -89,9 +101,9 @@
                   {{ __('Use an authentication code') }}
                 </button>
 
-                <x-jet-button>
+                <button type="submit" class="btn btn-primary">
                   {{ __('Log in') }}
-                </x-jet-button>
+                </button>
               </div>
             </form>
           </div>
