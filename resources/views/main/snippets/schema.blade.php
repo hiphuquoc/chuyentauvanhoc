@@ -38,10 +38,11 @@
         "potentialAction":{
             "@type":"ReadAction",
             "target":[
-                {"@type":"EntryPoint",
-                "urlTemplate":"{{ env('APP_URL') }}"
-                
-            }]
+                {
+                    "@type":"EntryPoint",
+                    "urlTemplate":"{{ env('APP_URL') }}"
+                }
+            ]
         }
     }</script>
 @endif
