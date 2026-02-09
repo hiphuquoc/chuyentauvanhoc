@@ -236,4 +236,16 @@ return [
         'PDF' => Barryvdh\DomPDF\Facade::class,
     ],
 
+    /* time cache (đồng bộ hoptackinhdoanh.dev) */
+    'cache_html_time'   => env('APP_CACHE_HTML_TIME', 2592000), // 1 tháng
+    'cache_redis_time'  => env('APP_CACHE_REDIS_TIME', 86400),   // 1 ngày
+
+    /* cache and minify settings */
+    'cache_html'        => env('APP_CACHE_HTML', false),
+    'minify_html'       => env('APP_MINIFY_HTML', false),
+    'minify_js_css'     => env('APP_MINIFY_JS_CSS', false),
+
+    /* domain and seo */
+    'domain_name'       => env('DOMAIN_NAME', ''),
 ];
+

@@ -3,12 +3,11 @@
     @include('main.snippets.meta', compact('info'))
 @endpush
 @push('meta-schema')
-    @include('main.snippets.schema', [
-        'info'          => $info,
-        'breadcrumb'    => [],
-        'list'          => [],
-        'listType'      => ['article', 'creativeworkseries']
-    ])
+    @include('main.schema.organization')
+    @if(!empty($info))
+        @include('main.schema.article', compact('info'))
+        @include('main.schema.creativeworkseries', compact('info'))
+    @endif
 @endpush
 @section('content')
     <!-- === START:: Slider Home === -->

@@ -26,7 +26,10 @@ return [
         'folderUpload'          => 'public/images/slider/'
     ],
     'cache'     => [
+        'enable'        => filter_var(env('APP_CACHE_HTML', false), FILTER_VALIDATE_BOOLEAN),
         'folderSave'    => 'public/caches/',
         'extension'     => 'html',
+        'disk'          => 'local',
+        'ttl'           => (int) env('APP_CACHE_HTML_TIME', 2592000), // đồng bộ APP_CACHE_HTML_TIME (1 tháng)
     ]
 ];
