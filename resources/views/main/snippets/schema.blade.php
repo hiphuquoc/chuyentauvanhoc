@@ -1,5 +1,5 @@
 <!-- Shema Webpage -->
-@if(!empty($info)&&in_array('article', $listType))
+@if((!empty($info)) && (in_array('article', $listType)))
     <script type="application/ld+json">{
         "@context": "https://schema.org",
         "@type":"Article",
@@ -47,7 +47,7 @@
     }</script>
 @endif
 <!-- Shema Creativeworkseries -->
-@if(!empty($info)&&in_array('creativeworkseries', $listType))
+@if((!empty($info)) && (in_array('creativeworkseries', $listType)))
     <script type="application/ld+json">
         {
             "@context": "https://schema.org/",
@@ -63,7 +63,7 @@
     </script>
 @endif
 <!-- Shema Breadcrumb -->
-@if(!empty($breadcrumb)&&in_array('breadcrumb', $listType))
+@if((!empty($breadcrumb)) && (in_array('breadcrumb', $listType)))
     <script type="application/ld+json">
         {
             "@context": "https://schema.org",
@@ -91,7 +91,7 @@
     </script>
 @endif
 <!-- Schema Listitem -->
-@if(!empty($list)&&in_array('listitem', $listType))
+@if((!empty($list)) && (in_array('listitem', $listType)))
     <script type="application/ld+json">
         {
             "@context": "https://schema.org",
