@@ -1,5 +1,5 @@
 @extends('layouts.main')
-<!-- @push('meta-info')
+@push('meta-info')
     @include('main.snippets.meta', compact('info'))
 @endpush
 @push('meta-schema')
@@ -9,7 +9,7 @@
         'list'          => [],
         'listType'      => ['article', 'creativeworkseries']
     ])
-@endpush -->
+@endpush
 @section('content')
     <!-- === START:: Slider Home === -->
     @include('main.home.slider')
